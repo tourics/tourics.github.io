@@ -61,7 +61,7 @@
 .jumbotron .price{
 	font-family: 'Oswald', sans-serif;
 	color: #888;
-	font-size: 20px;
+	font-size: 50px;
 	font-weight: 30px;
 	line-height: 60px;
 	word-wrap: break-word;
@@ -150,28 +150,96 @@ display: -webkit-box;
 	border-bottom-left-radius: 3px;
 	border-top-left-radius: 3px;
 }
+
+@media (max-width: 767px){
+	
+	/* mobile view */
+	#right-border{
+	
+		border-right:none;
+	}
+	
+	.programs-card {
+	min-height: 566px;/* desktop view image height*/
+	padding-right:0px;
+	
+	}
+	.jumbotron .content {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 0;
+    margin: 0px auto;
+    padding-top:0;
+	}
+	.from{
+		
+		float:left;
+	}
+	.price{
+		font-size:50px!important;
+		float:right;
+	}
+	.programs-section .card-item .price{
+	margin-right:-3px;
+	display:inline-block;
+	float:right;
+	font-size:14px;
+	color:#777;
+	padding-bottom:8px;
+	padding-top:8px;
+	padding-left: 15px; 
+	padding-right: 15px; 
+	border-radius:2px;
+	margin-top:10px;
+	background-color:rgba(0,0,0,0.1);
+	}
+	#no-right-padding{
+		padding-right:0px;	
+	}
+	#no-left-padding{
+		padding-left:0px;
+		padding-right:0px;		
+	}
+	#no-left-right-padding{
+		padding-left:0px;
+		padding-right:0px;	
+	}
+
+
+
+
+
+}
 .tour1 {
-    background: url(../img/plan/tour1.jpg) no-repeat center center;
+    background: url(http://www.aloha-hawaii.com/wp-content/uploads/2009/11/diamond-head.jpg) no-repeat center center;
+    
 }
 .tour2 {
-    background: url(../img/plan/tour2.jpg) no-repeat center center;
+    background: url(http://cdn.discoverhawaiitours.com/wp-content/uploads/hanauma-bay-snorkeling-tour.jpg) no-repeat center center;
+   
 }
 
 .tour3 {
-    background: url(../img/plan/tour3.jpg) no-repeat center center;
+    background: url(http://www.portaloha.com/SecretsOfHawaii/images/PaliLookout/Mag_PaliLookOut5.jpg) no-repeat center center;
+    
 }
 
 .tour4 {
-    background: url(../img/plan/tour4.jpg) no-repeat center center;
+    background: url(http://upload.wikimedia.org/wikipedia/commons/c/cb/Byodo-In_Temple_Oahu_01.jpg) no-repeat center center;
+   
 }
 .tour5 {
-    background: url(../img/plan/tour5.jpg) no-repeat center center;
+    background: url(http://cache.graphicslib.viator.com/graphicslib/page-images/360x240/44556_Oahu_Kualoa%20Ranch_d672-117.jpg) no-repeat center center;
+    
 }
 .tour6 {
-    background: url(../img/plan/tour6.jpg) no-repeat center center;
+    background: url(http://dole-plantation.com/assets/slideshows/maze/1.jpg) no-repeat center center;
+   
 }
 .tour7 {
     background: url(../img/plan/tour7.jpg) no-repeat center center;
+   
 }
 .news1{
 	background: url(http://ww2.sinaimg.cn/bmiddle/b4031917gw1elcof5i8cyj20bw0gn75l.jpg)no-repeat center center; 	

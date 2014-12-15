@@ -10,7 +10,6 @@
     <link rel="icon" href="../../favicon.ico">
 
     <title>Tour Guide</title>
-
     <!-- Bootstrap core CSS -->
     <link href="asset/css/bootstrap.min.css" rel="stylesheet">
 	<!-- language flat icon CSS -- document https://github.com/usrz/bootstrap-languages -->
@@ -136,20 +135,7 @@
                  
                    
             </div><!-- end of navbar-header"--> 
-            <div class="navbar-collapse navbar-right collapse secondary-nav">
-                <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="lang-xs lang-lbl" lang="en"></span><span class="caret"></span></a>
-                  <ul class="animated fadeInUp dropdown-menu" role="menu">
-                    <li><a href="#"><span class="lang-xs lang-lbl" lang="en"></span></a></li>
-                    <li><a href="#"><span class="lang-xs lang-lbl" lang="zh"></span></a></li>
-                  </ul>
-                </li>       
-                <li>
-                    <a href="login.html" class="dropdown-toggle"><span class="glyphicon glyphicon-user"></span></a>
-                </li>
-              </ul>
-            </div> 
+            
 		</div><!--row-->
          
          						  
@@ -157,33 +143,25 @@
             <div class="navbar-collapse collapse main-nav">
               <ul class="animated fadeInRight nav navbar-nav">
                 <li class="active"><a href="index.html">One day tour</a></li>
-                <li><a href="programs.html">Two day tour</a></li>
-                <li><a href="programs2.html">Round island tour</a></li>
-                <li><a href="view-detail.html">big island tour</a></li>
+               
                
                 
               </ul>
               <ul class="nav navbar-nav navbar-right nav-pills" style="padding-right:40px;">
+               	<li>
+                <a id ="open" class="user_edit_enable btn" > Open</a>
+                
+                </li>
+               
                 <li>
-                <a href="http://facebook.com/" class="btn btn-social-icon btn-facebook">
-                    <i class="fa fa-facebook"></i>
-                </a>
+                <a  type="button" class="user_edit_enable btn" data-toggle="modal" data-target="#myModal"> Save</a>
+                
                 </li>
+                
                 <li>
-                <a href="http://twitter.com/" class="btn btn-social-icon btn-twitter">
-                    <i class="fa fa-twitter"></i>
-                </a>
+                <a id="loginbtn" type="button" class="btn" data-toggle="modal" data-target="#loginWindow"> login</a>
                 </li>
-                                <li>
-                <a href="http://www.linkedin.com/in/" class="btn btn-social-icon btn-linkedin">
-                    <i class="fa fa-linkedin"></i>
-                </a>
-                </li>
-                                <li>
-                <a href="https://github.com/" class="btn btn-social-icon btn-github">
-                    <i class="fa fa-github"></i>
-                </a>
-                </li>
+              
               </ul>
               
             </div><!--/.nav-collapse -->
@@ -191,10 +169,793 @@
          
          
       </div>
+    </div> 
+<!--login Modal-->   
+
+ 		<div id="loginWindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="loginbox" style="margin-top:50px; margin-bottom:100px;" class="modal fade mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"> 
+               
+                <div class="panel panel-info" >
+                        <div class="panel-heading">
+                            <div class="panel-title">Sign In</div>
+                            
+                        </div>     
+    
+                        <div style="padding-top:30px" class="panel-body" >
+    
+                            <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                                
+                            <form name="login" id="loginform" class="form-horizontal" role="form">
+                                        
+                                <div style="margin-bottom: 25px" class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                            <input id="username" type="text" class="form-control" name="userid" value="" placeholder="username or email">                                        
+                                </div>
+                                    
+                                <div style="margin-bottom: 25px" class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                            <input id="password" type="password" class="form-control" name="pswrd" placeholder="password">
+                                </div>
+                                        
+    
+                                    
+                                <div class="input-group">
+                                          
+                                            <label>
+                                            Test Account:<br> username: user  <br>        Password: 123
+                                            </label>
+                                          
+                                </div>
+    
+    
+                                <div style="margin-top:10px" class="form-group">
+                                        <!-- Button -->
+    
+                                        <div class="col-sm-12 controls">
+                                          <a id="login" href="#" style="width:100%;" data-dismiss="modal" class="btn btn-success">Login  </a>
+                                       
+    
+                                        </div>
+                                </div>
+    
+    
+                                    
+                                </form>     
+    
+    
+    
+                            </div>                     
+                        </div>  
+            </div> 
+<!-- Modal Icon -->
+<div class="modal fade" id="mapMarkerWindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Marker</h4>
+      </div>
+      <div class="modal-body">
+         <div class="text-center" style="padding:20px;">Current Selected Icon: <img id="selectedIcon" src="http://maps.google.com/mapfiles/ms/icons/POI.png"></img>
+         </div>
+         <img id="icon1" src="http://maps.google.com/mapfiles/ms/icons/POI.png"></img>
+         <img id="icon2" src="http://www.mapize.com/generator/generatorSource/images_mapize/library/mapize_marker_red.png"></img>
+         <img id="icon3" src="http://www.gpsvisualizer.com/google_earth/icons/flag.png" ></img>
+         <img id="icon4" src="http://sanwebe.com/assets/google-map-save-markers-db/icons/pin_green.png" ></img>
+         <img id="icon5" src="http://wcdn2.dataknet.com/static/resources/icons/set94/1316bc52.png" ></img>
+         <img id="icon6" src="http://www.clospegase.com/static/images/girard.png" ></img>
+         <img id="icon7" src="http://www.myiconfinder.com/uploads/iconsets/32-32-e3b0d637d36ffc6a47106a091bb9473d.png" ></img>
+         <img id="icon8" src="http://kherkroldan.com/products/local-business-plugin/images/select.png" ></img>
+         <img id="icon9" src="http://adesoafrica.org/google-maps/map-marker-new.png" ></img>
+		 <img id="icon10" src="http://ca.runordye.com/shared/secondary_menu/FacebookThumbsUp_32x32.png" ></img>
+		 <img id="icon11" src="https://maps.gstatic.com/mapfiles/ms2/micons/camera.png" ></img>
+		 <img id="icon12" src="http://www.claytonwheatway.co.uk/images/pinMarker.png" ></img>
+		 <img id="icon13" src="http://osmdroid.googlecode.com/svn/trunk/osmdroid-android/src/main/resources/org/osmdroid/center.png" ></img>
+		 <img id="icon14" src="http://srl.mcgill.ca/projects/responder/images/legend_overhead_marker.svg" ></img>
+		 <img id="icon15" src="http://www.abudhabi-map.com/all_cache/map_local_search/markers/c0e923d355361eb71beabd9dfe8291a4.png" ></img>
+		 <img id="icon16" src="https://www.google.com/support/enterprise/static/geo/cdate/art/icons/job_edit_32.png" ></img>
+		 <img id="icon17" src="http://www.gifs-paradise.com/animations/animated-gifs-simpsons-035.gif" ></img>
+		 <img id="icon18" src="http://www.animatedgif.net/facessmiles/cheshiresmile_e0.gif" ></img>
+		 <img id="icon19" src="http://wapwind.wap.sh/images/iconnqsh.png.gif" ></img>
+		 <img id="icon20" src="http://indeziner.com/wp-content/uploads/70.gif" ></img>
+		 <img id="icon21" src="http://4.bp.blogspot.com/-aBMfydQh9no/U3Wzl5LAeZI/AAAAAAAAR0U/pdJMoVd-bnM/s1600/Animated+Birds+at+Animation+Bundle+(233).gif" ></img>
+		 <img id="icon22" src="http://www.paknews.es/urdu/star-animated.gif" ></img>
+		 <img id="icon23" src="http://v1.preloaders.net/preloaders/37/preview.gif" ></img>
+		 <img id="icon24" src="http://www.aglasshalffull.org/emoticons/smile-cool.gif" ></img>
+		 <img id="icon25" src="http://www.animate-gif.de/animals/mice/Maus15.gif" ></img>
+		 <img id="icon26" src="http://www.gifmania.co.uk/Comics-Animated-Gifs/Animated-Batman/Batman-vehicles/batmobile-18040.gif" ></img>
+		 <img id="icon27" src="http://www.gifs-paradise.com/animations/animated-gifs-rabbits-22.gif " ></img>
+		 <img id="icon28" src="http://www.caccioppoli.com/Animated%20gifs/Birds/Small_parrot.gif" ></img>
+		 <img id="icon29" src="https://www.questionpro.com/images/waiting.gif" ></img>
+		 <img id="icon30" src="http://fc01.deviantart.net/fs71/f/2010/017/1/3/Koopa_Troopa__Animated_by_Gipi2009.gif" ></img>
+		 <img id="icon31" src="http://www.gifandgif.eu/animated_gif/Lightning/Animated%20Gif%20Lightning%20(12).GIF" ></img>
+		 <img id="icon32" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAgACADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD75/Z6Wzm/Zk+Ftve+W0E3hHSo2SRsBwbOIEe+a+S/2p9Q8H6dput2Xw78KW1vq2lzNYz6zFF5dn538cSbvld4ww3soJBIXrnHQ/Bv4vWnhr4b+ALM6u+ox3HhnSYEgyZBayR26BkzjCZIx+Fc7+0f8RvDHgXwH4V8LakTYz3gnuTbhA3lNcSM4dj3yxOSM1xuXtFJ9vxZ14Cn7XEpVF7qPiXSvi38TfhfHqsTy2Wu2t2p3xXtukwwRzsOAVOPQj2r6Q+AvgrS/jb4M8L+NbVhDMXu4b63y0vkTQquQUPHKsCDjJH0rxLxgLAlNPa4tpLrOWiRvnUduP1/Gvav2H/B8dt4T8Q3UOrSWNteeIJozCs4iV4VtP3hB7fPgEj6V49acnT5rWcfI9jN8MsFDnoS/Uxvgf8AtW+M5/Acek6H8F9I1Sw8MaRHBea5NNIyiKONUEkgO0bmK5wGzk8Cu4+I+uxfEfxJ8NbmbQYE0y00OC5MaKGVDt5haQkBFBBXce4xwTXC/B34q+MNQ8Cy+Etcht7nwpe+EzFpiRKilGiRVG4IQWyI5CS2SCDnjgS+B/FqaV8FfDmkXRgN61k9pDPOSoDxnEsEndTyroTwyyAdRz6tapzrTb/I9LL8LDCNOTTctO62R5Rr9tYax4x8R6rJbxo8M/mOEIZYyeiggY+mPSvdf2e/jT8NH0fQPBOpWzadrNvem8bU5mQxXZd2zFtJ3b+VwmDwM5ycV876fqCeKfERtLP5tOgMl5diEcbYmxtYEcKWK4OPmwfx8mGgDV1Oq+YwVmkyjDDqVc8kdMnIxj09a8/2anF+0O/HYX+0P9nprzutNup//9k=" ></img>
+
+	  
+      </div>
+      <div class="modal-footer">
+		 <div><a class="pull-left btn btn-warning" id="upload" href="#">Upload a image</a></div> 
+        <button id="cancleIcon" type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
+        <a id="upload_data" data-dismiss="modal" type="button" class="btn btn-primary">Save</a>
+      </div>
     </div>
-    
-  
-    
+  </div>
+</div>
+
+<!-- Modal save all-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Confirmation</h4>
+      </div>
+      <div class="modal-body">
+        Do you want to save all the changes?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <a id="save"  data-dismiss="modal" type="button" class="btn btn-primary">Save changes</a>
+      </div>
+    </div>
+  </div>
+</div>
+   
+<!--Modal title 1-->   
+
+<!-- Button trigger modal -->
+
+<!-- Modal 1 -->
+<div class="modal fade" id="edittitle1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Title</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle1"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle1" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2-->
+<div class="modal fade" id="edittitle2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Address</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle2"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle2" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 3-->
+<div class="modal fade" id="edittitle3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Description</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle3"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle3" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 4-->
+<div class="modal fade" id="edittitle4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Duration</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle4"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle4" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 5-->
+<div class="modal fade" id="edittitle5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Cost</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle5"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle5" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal 1 -->
+<div class="modal fade" id="edittitle1a" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Title</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle1a"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle1a" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2-->
+<div class="modal fade" id="edittitle2a" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Address</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle2a"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle2a" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 3-->
+<div class="modal fade" id="edittitle3a" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Description</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle3a"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle3a" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 4-->
+<div class="modal fade" id="edittitle4a" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Duration</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle4a"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle4a" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 5-->
+<div class="modal fade" id="edittitle5a" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Cost</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle5a"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle5a" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal 1 -->
+<div class="modal fade" id="edittitle1b" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Title</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle1b"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle1b" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2-->
+<div class="modal fade" id="edittitle2b" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Address</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle2b"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle2b" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 3-->
+<div class="modal fade" id="edittitle3b" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Description</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle3b"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle3b" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 4-->
+<div class="modal fade" id="edittitle4b" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Duration</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle4b"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle4b" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 5-->
+<div class="modal fade" id="edittitle5b" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Cost</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle5b"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle5b" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal 1 -->
+<div class="modal fade" id="edittitle1c" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Title</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle1c"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle1c" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2-->
+<div class="modal fade" id="edittitle2c" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Address</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle2c"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle2c" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 3-->
+<div class="modal fade" id="edittitle3c" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Description</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle3c"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle3c" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 4-->
+<div class="modal fade" id="edittitle4c" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Duration</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle4c"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle4c" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 5-->
+<div class="modal fade" id="edittitle5c" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Cost</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle5c"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle5c" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- Modal 1 -->
+<div class="modal fade" id="edittitle1d" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Title</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle1d"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle1d" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2-->
+<div class="modal fade" id="edittitle2d" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Address</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle2d"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle2d" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 3-->
+<div class="modal fade" id="edittitle3d" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Description</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle3d"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle3d" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 4-->
+<div class="modal fade" id="edittitle4d" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Duration</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle4d"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle4d" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 5-->
+<div class="modal fade" id="edittitle5d" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Cost</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle5d"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle5d" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Modal 1 -->
+<div class="modal fade" id="edittitle1e" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Title</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle1e"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle1e" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2-->
+<div class="modal fade" id="edittitle2e" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Address</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle2e"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle2e" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 3-->
+<div class="modal fade" id="edittitle3e" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Description</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle3e"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle3e" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 4-->
+<div class="modal fade" id="edittitle4e" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Duration</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle4e"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle4e" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 5-->
+<div class="modal fade" id="edittitle5e" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Cost</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <textarea class="form-control"  id="newtitle5e"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="savetitle5e" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+ 
 <!--space down from the menu bar and logo section--->
     <div class="fluide-container hidden-xs" style="background-color:#333">
           <div style="height:135px"></div> 
@@ -204,7 +965,7 @@
     
     <!-- Carousel
     ================================================== -->
-  <div id="MissionBanner" class="carousel slide">
+  <!--<div id="MissionBanner" class="carousel slide">
   
         <ol class="animated fadeIn carousel-indicators">
             <li data-target="#MissionBanner" data-slide-to="0" class="active"></li>
@@ -270,50 +1031,91 @@
         </a>
 
    
-    </div>
+  </div> -->
     <!-- /.carousel -->
+<div id="googleMap" style="z-index:1; width:100%;height:380px;"></div>
+<button id="reload" style="margin:5px;" onclick="loadScript" class="user_edit_enable pull-right btn btn-warning">Reload</button>
+<button style="margin:5px;" type="button" data-toggle="modal" data-target="#mapMarkerWindow" class="user_edit_enable user_edit_enable pull-right btn btn-warning">Change Maker</button>
+<button id="usePicAsMarker" style="margin:5px;" class="user_edit_enable pull-right btn btn-warning">Use Tour Pic as Marker</button>
+<div style="margin:5px;"  class="user_edit_enable pull-right btn btn-warning btn-group">
+        <button type="button" class="user_edit_enable btn btn-default btn-xs">SIZE</button>
+        <button id="sizeL" type="button" class="user_edit_enable btn btn-default btn-xs">-</button>
+        <button id="sizeM" type="button" class="user_edit_enable btn btn-default btn-xs">+</button>
+</div>
 
+<div style="margin:5px;" class="user_edit_enable pull-right btn btn-warning" role="toolbar" style="margin: 0;">
+      <div class="btn-group">
+        <button type="button" class="user_edit_enable btn btn-default btn-xs">Width</button>
+        <button id="widthL" type="button" class="user_edit_enable btn btn-default btn-xs">-</button>
+        <button id="widthM" type="button" class="user_edit_enable btn btn-default btn-xs">+</button>
+      </div>
+      <div class="btn-group">
+        <button type="button" class="user_edit_enable btn btn-default btn-xs">Height</button>
+        <button id="heightL" type="button" class="user_edit_enable btn btn-default btn-xs">-</button>
+        <button id="heightM" type="button" class="user_edit_enable btn btn-default btn-xs">+</button>
+      </div>
+      
+     
+  </div>
      <!--    activities
   ================================================== ---->
 
- 
-  			<div class="container mobile mobile-program-title visible-xs ">
-                          
-                             <p class="text-center">One day tours in Honolulu</p>
-                     
-                    
-            </div>
             
   
-  			<div class="jumbotron hidden-xs">
+  			<div class="jumbotron card1">
             	<div class="text-center container"> 
             	<h1 class="desktop-program-title">One day tours in Honolulu</h1>
                 </div>
             </div>
   	
-            <div class="jumbotron hidden-xs">
+            <div class="jumbotron">
                                      <div class="left-in">
-                                                     <div class=" container programs-card"> <a class="view-detail" href="view-detail.html"></a>
+                                                     <div class=" container programs-card"> 
                                                             <div class="col-sm-4 col-xs-12" id="no-left-padding">
                                                                        
-                                                                        <div class="item tour1"></div>              
+                                                                        <div id="image1" content="assets/1.jpg" class="item tour1"><button id="image1_data" type="button" class="user_edit_enable btn btn-warning" data-dismiss="modal"><i class="glyphicon glyphicon-pencil"></i></button>  </div>
+                                                                               
                                                             </div>	
                                     
                                                             
                                                             <div class="programs col-sm-6 col-xs-12">
-                                                                <h3 class="program-title two-row-text-limit">Sample Activity One</h3>
-                                                               
-                                                                <h5 class="hidden-xs one-row-text-limit"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;91-119 Olai Street,Kapolei, HI 96707</h5>
-                                                                <h5  class="three-rows-text-limit"> Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text </h5>
-                                                           		
-                                                               
-                                                              
+                                                                <h3>
+                                                                	<span id="title1" class="program-title two-row-text-limit">Diamond Head Summit Trail</span>
+                                                                	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle1">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span>
+                                                                </h3>
+                                                                <h5><span  class="glyphicon glyphicon-map-marker"></span>
+                                                                	<span id="title2" class="one-row-text-limit">
+                                                                		&nbsp;&nbsp;&nbsp;Diamond Head State Monument Honolulu, HI 96815
+                                                                	</span>
+                                                                	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle2">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span>
+                                                                </h5>
+                                                                <h5>
+                                                                	<span id="title3" class="three-rows-text-limit"> 
+                                                                		Diamond Head is part of the complex of cones, vents, and their associated eruption flows that are collectively known to geologists as the Honolulu Volcanic Series, eruptions from the Koʻolau Volcano that took place long after the volcano formed and had gone dormant. 
+                                                                	</span>
+                                                                	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle3">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span>
+                                                                </h5>   
                                                             </div>
+                                                            
                                                             <div class="col-sm-2 col-xs-12">
                                                                 <div class="content text-center">
-                                                                       <P class="from">2hours</P>
-                                                                       <p class="price">$20</p> 
-                                                                       <p class="view-detail"><span class="glyphicon glyphicon-chevron-right"></span> View Detail</p>   
+                                                                       <P><span id="title4" class="from">1hours</span>
+	                                                                       	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle4">
+	                                                                		<i class="glyphicon glyphicon-pencil"></i>
+	                                                                		</span>
+                                                                		</P>
+                                                                       <p><span id="title5" class="price">$6</span>
+                                                                       		<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle5">
+                                                                				<i class="glyphicon glyphicon-pencil"></i>
+                                                                			</span>
+                                                                	   </p> 
+                                                                       
                                                                 </div>   
                                                          
                                                                        
@@ -331,31 +1133,58 @@
           
             
             
-            <div class="jumbotron hidden-xs">
+            <div class="jumbotron card2">
                                      <div class="right-in">
-                                                     <div class=" container programs-card"> <a class="view-detail" href="view-detail.html"></a>
+                                                    <div class=" container programs-card"> 
                                                             <div class="col-sm-4 col-xs-12" id="no-left-padding">
                                                                        
-                                                                        <div class="item tour2"></div>              
+                                                                        <div id="image2" content="assets/2.jpg" class="item tour2"><button id="image1a_data" type="button" class="user_edit_enable btn btn-warning" data-dismiss="modal"><i class="glyphicon glyphicon-pencil"></i></button>  </div>
+                                                                               
                                                             </div>	
                                     
                                                             
                                                             <div class="programs col-sm-6 col-xs-12">
-                                                                <h3 class="two-row-text-limit program-title">Sample Activity Two</h3>
-                                                                <h5 class="hidden-xs one-row-text-limit"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;91-119 Olai Street,Kapolei, HI 96707</h5>
-                                                                <h5  class="three-rows-text-limit"> Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text </h5>
-                                                           		
-                                                                
-                                                           
-                                                            
+                                                                <h3>
+                                                                	<span id="title1a" class="program-title two-row-text-limit">Hanauma Bay Snorkel & Boogie Board Adventure</span>
+                                                                	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle1a">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span>
+                                                                </h3>
+                                                                <h5><span class="glyphicon glyphicon-map-marker"></span>
+                                                                	<span id="title2a" class="one-row-text-limit">
+                                                                		
+                                                                		&nbsp;&nbsp;&nbsp;Hanauma Bay Rd, Honolulu, HI 96825
+                                                                	</span>
+                                                                	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle2a">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span>
+                                                                </h5>
+                                                                <h5>
+                                                                	<span id="title3a" class="three-rows-text-limit"> 
+                                                                		Discover Oahu’s Windward Coast, where locals love to play in the sun! Enjoy fun in the sun at Bellow’s Beach Park, one of Oahu’s best white sand beaches where you will experience the thrill of boogie boarding or just relaxing on an un-crowded beach!  
+                                                                	</span>
+                                                                	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle3a">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span>
+                                                                </h5>   
                                                             </div>
+                                                            
                                                             <div class="col-sm-2 col-xs-12">
                                                                 <div class="content text-center">
-                                                                       <P class="from">1hours</P>
-                                                                       <p class="price">$189</p>
-                                                                        <p class="view-detail"><span class="glyphicon glyphicon-chevron-right"></span> View Detail</p>     
-                                                                </div> 
-                                                                           
+                                                                       <P><span id="title4a" class="from">1hours</span>
+                                                                       	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle4a">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span></P>
+                                                                       <p><span id="title5a" class="price">$20</span>
+                                                                       <span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle5a">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span></p> 
+                                                                       
+                                                                </div>   
+                                                         
+                                                                       
+                                                                       
+                                                                          
                                                             </div>	
                                                         
                                                     </div><!-- end of program card content -->
@@ -369,28 +1198,58 @@
             
             
             
-            <div class="jumbotron hidden-xs">
+            <div class="jumbotron card3">
                                      <div class="left-in">
-                                                     <div class=" container programs-card"> <a class="view-detail" href="view-detail.html"></a>
+                                                     <div class=" container programs-card"> 
                                                             <div class="col-sm-4 col-xs-12" id="no-left-padding">
                                                                        
-                                                                        <div class="item tour3"></div>              
+                                                                        <div id="image3" content="assets/3.jpg" class="item tour3"><button id="image1b_data" type="button" class="user_edit_enable btn btn-warning" data-dismiss="modal"><i class="glyphicon glyphicon-pencil"></i></button>  </div>
+                                                                               
                                                             </div>	
                                     
                                                             
                                                             <div class="programs col-sm-6 col-xs-12">
-                                                                <h3 class="two-row-text-limit program-title">Sample Activity Three</h3>
-                                                                <h5 class="hidden-xs one-row-text-limit"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;91-119 Olai Street,Kapolei, HI 96707</h5>
-                                                                <h5  class="three-rows-text-limit"> Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text </h5>
-                                                           		
-                                                               
+                                                                <h3>
+                                                                	<span id="title1b" class="program-title two-row-text-limit">Pali Lookout</span>
+                                                                	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle1b">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span>
+                                                                </h3>
+                                                                <h5>
+                                                                	<span class="glyphicon glyphicon-map-marker"></span>
+                                                                	<span id="title2b" class="one-row-text-limit">
+                                                                		&nbsp;&nbsp;&nbsp;Nuʻuanu Pali State Wayside, Nuuanu Pali Drive, Honolulu, HI 96817
+                                                                	</span>
+                                                                	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle2b">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span>
+                                                                </h5>
+                                                                <h5>
+                                                                	<span id="title3b" class="three-rows-text-limit"> 
+                                                                		Hiked up to the Pali and enjoyed stunning view from the top and through the Puka (a vertical lava hole). The trailhead is hidden behind the broken part of the wall along the bus parking lot. Trail is steep and along the cliff/ridge, so it can be a bit intimidating for those not comfortable with height. The view was totally amazing. 
+                                                                	</span>
+                                                                	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle3b">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span>
+                                                                </h5>   
                                                             </div>
+                                                            
                                                             <div class="col-sm-2 col-xs-12">
                                                                 <div class="content text-center">
-                                                                       <P class="from">2hours</P>
-                                                                       <p class="price">Free</p>
-                                                                       <p class="view-detail"><span class="glyphicon glyphicon-chevron-right"></span> View Detail</p>     
-                                                                </div>           
+                                                                       <P><span id="title4b" class="from">1hours</span>
+                                                                       	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle4b">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span></P>
+                                                                       <p><span id="title5b"  class="price">$20</span>
+                                                                       <span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle5b">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span></p> 
+                                                                       
+                                                                </div>   
+                                                         
+                                                                       
+                                                                       
+                                                                          
                                                             </div>	
                                                         
                                                     </div><!-- end of program card content -->
@@ -403,27 +1262,58 @@
             
 
 
-            <div class="jumbotron hidden-xs">
+            <div class="jumbotron card4">
                                      <div class="right-in">
-                                                     <div class=" container programs-card"> <a class="view-detail" href="view-detail.html"></a>
+                                                     <div class=" container programs-card"> 
                                                             <div class="col-sm-4 col-xs-12" id="no-left-padding">
                                                                        
-                                                                        <div class="item tour4"></div>              
+                                                                        <div id="image4" content="assets/4.jpg" class="item tour4"><button id="image1c_data" type="button" class="user_edit_enable btn btn-warning" data-dismiss="modal"><i class="glyphicon glyphicon-pencil"></i></button>  </div>
+                                                                               
                                                             </div>	
                                     
                                                             
-                                                            <div class="two-row-text-limit programs col-sm-6 col-xs-12">
-                                                                <h3 class="program-title">Sample Activity Four</h3>
-                                                                <h5 class="hidden-xs one-row-text-limit"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;91-119 Olai Street,Kapolei, HI 96707</h5>
-                                                                <h5  class="three-rows-text-limit"> Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text </h5>
-                                                           		
+                                                            <div class="programs col-sm-6 col-xs-12">
+                                                                <h3>
+                                                                	<span id="title1c" class="program-title two-row-text-limit">Byodo-In Temple</span>
+                                                                	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle1c">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span>
+                                                                </h3>
+                                                                <h5><span class="glyphicon glyphicon-map-marker"></span>
+                                                                	<span id="title2c" class="one-row-text-limit">
+                                                                		
+                                                                		&nbsp;&nbsp;&nbsp;47 200 Kahekili Hwy Kaneohe, HI 96744 United States
+                                                                	</span>
+                                                                	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle2c">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span>
+                                                                </h5>
+                                                                <h5>
+                                                                	<span id="title3c" class="three-rows-text-limit"> 
+                                                                		Founded in 1963 by Mr. Paul Trousdale, Valley of the Temples Memorial Park has served the community by providing a place of peace and serenity for loved ones. 
+                                                                	</span>
+                                                                	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle3c">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span>
+                                                                </h5>   
                                                             </div>
+                                                            
                                                             <div class="col-sm-2 col-xs-12">
                                                                 <div class="content text-center">
-                                                                       <P class="from">1hours</P>
-                                                                       <p class="price">Free</p>
-                                                                       <p class="view-detail"><span class="glyphicon glyphicon-chevron-right"></span> View Detail</p>     
-                                                                </div>           
+                                                                       <P><span id="title4c" class="from">1hours</span>
+                                                                       	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle4c">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span></P>
+                                                                       <p><span id="title5c" class="price">$3</span>
+                                                                       <span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle5c">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span></p> 
+                                                                       
+                                                                </div>   
+                                                         
+                                                                       
+                                                                       
+                                                                          
                                                             </div>	
                                                         
                                                     </div><!-- end of program card content -->
@@ -434,28 +1324,59 @@
                     
             </div>
             
-            <div class="jumbotron hidden-xs">
+            <div class="jumbotron card5">
                                      <div class="right-in">
-                                                     <div class=" container programs-card"> <a class="view-detail" href="view-detail.html"></a>
+                                                    <div class=" container programs-card"> 
                                                             <div class="col-sm-4 col-xs-12" id="no-left-padding">
                                                                        
-                                                                        <div class="item tour5"></div>              
+                                                                        <div id="image5" content="assets/5.jpg" class="item tour5"><button id="image1d_data" type="button" class="user_edit_enable btn btn-warning" data-dismiss="modal"><i class="glyphicon glyphicon-pencil"></i></button>  </div>
+                                                                               
                                                             </div>	
                                     
                                                             
-                                                            <div class="two-row-text-limit programs col-sm-6 col-xs-12">
-                                                                <h3 class="program-title">Sample Activity Five</h3>
-                                                                <h5 class="hidden-xs one-row-text-limit"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;91-119 Olai Street,Kapolei, HI 96707</h5>
-                                                                <h5  class="three-rows-text-limit"> Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text </h5>
-                                                           		
-                                                               
+                                                            <div class="programs col-sm-6 col-xs-12">
+                                                                <h3>
+                                                                	<span id="title1d" class="program-title two-row-text-limit">Kualoa Ranch</span>
+                                                                	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle1d">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span>
+                                                                </h3>
+                                                                <h5><span class="glyphicon glyphicon-map-marker"></span>
+                                                                	<span id="title2d" class="one-row-text-limit">
+                                                                		
+                                                                		&nbsp;&nbsp;&nbsp; 49-560 Kamehameha Hwy Kaneohe, HI 96744
+                                                                	</span>
+                                                                	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle2d">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span>
+                                                                </h5>
+                                                                <h5>
+                                                                	<span id="title3d" class="three-rows-text-limit"> 
+                                                                		Family-owned Kualoa Ranch is a one-stop adventure playground in Oahu. Dating back to 1850, the cattle ranch is a popular location for horse-riding tours and all-terrain trails.
+                                                                	</span>
+                                                                	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle3d">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span>
+                                                                </h5>   
                                                             </div>
+                                                            
                                                             <div class="col-sm-2 col-xs-12">
                                                                 <div class="content text-center">
-                                                                       <P class="from">45mins</P>
-                                                                       <p class="price">Free</p>
-                                                                       <p class="view-detail"><span class="glyphicon glyphicon-chevron-right"></span> View Detail</p>     
-                                                                </div>           
+                                                                       <P><span id="title4d" class="from">1hours</span>
+                                                                       	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle4c">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span></P>
+                                                                       <p><span id="title5d" class="price">$21</span>
+                                                                       <span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle5d">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                		</span>
+                                                                	  </p> 
+                                                                       
+                                                                </div>   
+                                                         
+                                                                       
+                                                                       
+                                                                          
                                                             </div>	
                                                         
                                                     </div><!-- end of program card content -->
@@ -468,28 +1389,57 @@
             
             
             
-            <div class="jumbotron hidden-xs">
+            <div class="jumbotron card6">
                                      <div class="left-in">
-                                                     <div class=" container programs-card"> <a class="view-detail" href="view-detail.html"></a>
+                                                     <div class=" container programs-card"> 
                                                             <div class="col-sm-4 col-xs-12" id="no-left-padding">
                                                                        
-                                                                        <div class="item tour6"></div>              
+                                                                        <div id="image6" content="assets/6.jpg" class="item tour6"><button id="image1e_data" type="button" class="user_edit_enable btn btn-warning" data-dismiss="modal"><i class="glyphicon glyphicon-pencil"></i></button>  </div>
+                                                                               
                                                             </div>	
                                     
                                                             
-                                                            <div class="two-row-text-limit programs col-sm-6 col-xs-12">
-                                                                <h3 class="program-title">Sample Activity Six</h3>
-                                                                <h5 class="hidden-xs one-row-text-limit"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;91-119 Olai Street,Kapolei, HI 96707</h5>
-                                                                <h5  class="three-rows-text-limit"> Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text Descript text </h5>
-                                                           		
-                                                                
+                                                            <div class="programs col-sm-6 col-xs-12">
+                                                                <h3>
+                                                                	<span id="title1e" class="program-title two-row-text-limit">Dole Plantation</span>
+                                                                	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle1e">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span>
+                                                                </h3>
+                                                                <h5><span class="glyphicon glyphicon-map-marker"></span>
+                                                                	<span id="title2e" class="one-row-text-limit">
+                                                                		&nbsp;&nbsp;&nbsp;64 1550 Kamehameha Hwy Wahiawa, HI 96786
+                                                                	</span>
+                                                                	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle2e">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span>
+                                                                </h5>
+                                                                <h5>
+                                                                	<span id="title3e" class="three-rows-text-limit"> 
+                                                                		In 2008, Dole Plantation’s giant Pineapple Garden Maze was declared the world’s largest maze. The maze stretches over three acres and includes nearly two and one-half miles of paths crafted from 14,000 colorful Hawaiian plants. 
+                                                                	</span>
+                                                                	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle3e">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span>
+                                                                </h5>   
                                                             </div>
+                                                            
                                                             <div class="col-sm-2 col-xs-12">
                                                                 <div class="content text-center">
-                                                                       <P class="from">1hrs</P>
-                                                                       <p class="price">Free</p>
-                                                                       <p class="view-detail"><span class="glyphicon glyphicon-chevron-right"></span> View Detail</p>     
-                                                                </div>           
+                                                                       <P><span id="title4e" class="from">1hours</span>
+                                                                       	<span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle4e">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span></P>
+                                                                       <p><span id="title5e" class="price">$6</span>
+                                                                       <span style="margin-left:10px; margin-top:-10px;" type="button" class="user_edit_enable btn btn-warning btn-xs" data-toggle="modal" data-target="#edittitle5e">
+                                                                		<i class="glyphicon glyphicon-pencil"></i>
+                                                                	</span></p> 
+                                                                       
+                                                                </div>   
+                                                         
+                                                                       
+                                                                       
+                                                                          
                                                             </div>	
                                                         
                                                     </div><!-- end of program card content -->
@@ -500,92 +1450,7 @@
                     
             </div>
             
-            <div class="container mobile padding-left-right-3% visible-xs ">
-                <div class="mobile-program-card">
-                    <a class="view-detail" href=""></a>
-                        <div class="program-image item tour1"></div>
-                        <div class="program-detail">
-                            <div class="row">
-                                <h5 class="col-xs-12 title ">Sample Activity One</h5>
-                                <div class="price text-center">
-                                 	<h5>$20</h5>
-                                 </div>
-                            </div>
-                        </div>
-                   
-                </div>     
-            </div>
-            
-            <div class="container mobile padding-left-right-3% visible-xs ">
-                <div class="mobile-program-card">
-                    <a class="view-detail" href=""></a>
-                        <div class="program-image item tour2"></div>
-                        <div class="program-detail">
-                            <div class="row">
-                                <h5 class="col-xs-12 title ">Sample Activity Two</h5>
-                                <div class="price text-center">
-                                 	<h5>Free</h5>
-                                 </div>
-                            </div>
-                        </div>
-                   
-                </div>     
-            </div>
-            
-            
-            <div class="container mobile padding-left-right-3% visible-xs ">
-                <div class="mobile-program-card">
-                    <a class="view-detail" href=""></a>
-                        <div class="program-image item tour3"></div>
-                        <div class="program-detail">
-                            <div class="row">
-                                <h5 class="col-xs-12 title ">Sample Activity Three</h5>
-                                <div class="price text-center">
-                                 	<h5>Free</h5>
-                                 </div>
-                            </div>
-                        </div>
-                  
-                </div>     
-            </div>
-            
-            
-            <div class="container mobile padding-left-right-3% visible-xs ">
-                <div class="mobile-program-card">
-                    <a class="view-detail" href=""></a>
-                        <div class="program-image item tour4"></div>
-                        <div class="program-detail">
-                            <div class="row">
-                                <h5 class="col-xs-12 title ">Sample Activity Four</h5>
-                                <div class="price text-center">
-                                 	<h5>$100</h5>
-                                 </div>
-                            </div>
-                        </div>
-                 
-                </div>     
-            </div>
-            
-             <div class="container mobile padding-left-right-3% visible-xs ">
-                <div class="mobile-program-card">
-                    <a class="view-detail" href=""></a>
-                        <div class="program-image item tour5"></div>
-                        <div class="program-detail">
-                            <div class="row">
-                                <h5 class="col-xs-12 title ">Sample Activity Five</h5>
-                                <div class="price text-center">
-                                 	<h5>Free</h5>
-                                 </div>
-                            </div>
-                        </div>
-                 
-                </div>     
-            </div>
-            
 
-            
-            
-            
   
     <!-- end of activities showcase -->
 
@@ -608,7 +1473,18 @@
 	<script src="asset/js/jQuery_v1.8.2.js"></script><!--this old version jQuery must be used with SmoothScroll.js-->    <!--if delete this jquery v1.8.2, it will cause a nav auto expanded when switch to mobile view. the bug comes from custom.js/viewport checker js(bug source)-->
     <script src="asset/js/SmoothScroll.js"></script><!--this js must be used with jQuery_v1.8.2.js-->
 	<script src="asset/js/custom.js"></script>
+	<script src="asset/js/jquery.ocupload-1.1.2.packed.js"></script>
     
+    
+  <script src="javascripts/js.Support.js" type="text/javascript"></script>
+  <script src="javascripts/js.File.js" type="text/javascript"></script>
+  <script src="javascripts/js.FileDnD.js" type="text/javascript"></script>
+  <script src="javascripts/page.js" type="text/javascript"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
+  <script src="http://malsup.github.com/jquery.form.js"></script>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+   
     
   <!-- adjust navigation bar size when scroll down-->
 	<script>$(function(){
@@ -629,8 +1505,208 @@
 	   });
  	});</script>
    
+	<!--script src="http://maps.googleapis.com/maps/api/js"></script>
+	<script>
+		var myCenter=new google.maps.LatLng(21.431714, -157.952848);
+		
+		function initialize()
+		{
+			var mapProp = {
+			  center:myCenter,
+			  zoom:10,
+			  mapTypeId:google.maps.MapTypeId.ROADMAP
+			  };
+			
+			var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+			google.maps.event.trigger(map, 'resize');
+			setMarkers(map, beaches);
+		}
+		
+		 var beaches = [
+			  ['Diamond Head Summit Trail', "91-119 Olai Street,Kapolei, HI 96707", 0, 1],
+			  ['Hanauma Bay Snorkel & Boogie Board Adventure', 'Hanauma Bay Rd, Honolulu, HI 96825', 0, 2],
+			  ['Pali Lookout', 'Nuʻuanu Pali State Wayside, Nuuanu Pali Drive, Honolulu, HI 96817', 0, 3],
+			  ['Byodo-In Temple', '47 200 Kahekili Hwy Kaneohe, HI 96744 United States', 0, 4],
+			  ['Kualoa Ranch',  '49–560 Kamehameha Highway, Honolulu', 0, 5],
+			  ['Dole Plantation',  '64 1550 Kamehameha Hwy Wahiawa, HI 96786 ', 0, 5]
+		  ];
+		
+		function setMarkers(map, locations) {
+			
 
+		  var image = {
+		    url: 'http://maps.google.com/mapfiles/ms/icons/POI.png',
+		    
+		  };
 
+		  var shape = {
+		      coords: [1, 1, 1, 20, 18, 20, 18 , 1],
+		      type: 'poly'
+		  };
+		  var geocoder = new google.maps.Geocoder();
+		  for (var i = 0; i < locations.length; i++) {
+		    var beach = locations[i];
+		    // myLatLng = new google.maps.LatLng(beach[1], beach[2]);
+		    geocoder.geocode({"address": beach[1] }, function(results) { 
+				var marker = new google.maps.Marker({   
+			        position: results[0].geometry.location,
+			        map: map,
+			        icon: image,
+			        shape: shape,
+			        title: beach[0],
+			        zIndex: beach[3],
+			        animation: google.maps.Animation.BOUNCE,
+
+		    	});
+			});
+		  
+		  }
+		}
+		
+		google.maps.event.addDomListener(window, 'load', initialize);
+</script-->
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<!--script>
+
+function initialize() {
+	var myCenter=new google.maps.LatLng(21.431714, -157.952848);
+	var mapProp = {
+	  center:myCenter,
+	  zoom:10,
+	  mapTypeId:google.maps.MapTypeId.ROADMAP
+  	};
+			
+	var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+	
+	
+	var homeControlDiv = document.createElement('div');
+  	var homeControl = new HomeControl(homeControlDiv, map);
+
+  	homeControlDiv.index = 1;
+  	map.controls[google.maps.ControlPosition.RIGHT].push(homeControlDiv);
+  	
+  	var reloadControlDiv = document.createElement('div');
+  	var reloadControl = new ReloadControl(reloadControlDiv, map);
+
+  	reloadControlDiv.index = 1;
+  	map.controls[google.maps.ControlPosition.RIGHT].push(reloadControlDiv);
+
+	google.maps.event.trigger(map, 'resize');
+	setMarkers(map, beaches);
+
+}
+function setMarkers(map, locations) {
+			
+
+		  var image = {
+		    url: 'http://maps.google.com/mapfiles/ms/icons/POI.png',
+		    
+		  };
+
+		  var shape = {
+		      coords: [1, 1, 1, 20, 18, 20, 18 , 1],
+		      type: 'poly'
+		  };
+		  var geocoder = new google.maps.Geocoder();
+		  for (var i = 0; i < locations.length; i++) {
+		    var beach = locations[i];
+		    // myLatLng = new google.maps.LatLng(beach[1], beach[2]);
+		    geocoder.geocode({"address": beach[1] }, function(results) { 
+				var marker = new google.maps.Marker({   
+			        position: results[0].geometry.location,
+			        map: map,
+			        icon: image,
+			        shape: shape,
+			        title: beach[0],
+			        zIndex: beach[3],
+			        animation: google.maps.Animation.BOUNCE,
+
+		    	});
+			});
+		  
+		  }
+}
+var beaches = [
+			  ['Diamond Head Summit Trail', "91-119 Olai Street,Kapolei, HI 96707", 0, 1],
+			  ['Hanauma Bay Snorkel & Boogie Board Adventure', 'Hanauma Bay Rd, Honolulu, HI 96825', 0, 2],
+			  ['Pali Lookout', 'Nuʻuanu Pali State Wayside, Nuuanu Pali Drive, Honolulu, HI 96817', 0, 3],
+			  ['Byodo-In Temple', '47 200 Kahekili Hwy Kaneohe, HI 96744 United States', 0, 4],
+			  ['Kualoa Ranch',  '49–560 Kamehameha Highway, Honolulu', 0, 5],
+			  ['Dole Plantation',  '64 1550 Kamehameha Hwy Wahiawa, HI 96786 ', 0, 6]
+		  ];
+
+function loadScript() {
+  initialize();
+}
+function HomeControl(controlDiv, map) {
+
+  // Set CSS styles for the DIV containing the control
+  // Setting padding to 5 px will offset the control
+  // from the edge of the map
+  controlDiv.style.padding = '5px';
+
+  // Set CSS for the control border
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundColor = 'white';
+  controlUI.style.borderStyle = 'solid';
+  controlUI.style.borderWidth = '2px';
+  controlUI.style.cursor = 'pointer';
+  controlUI.style.textAlign = 'center';
+  controlUI.title = 'Click to set the map to Home';
+  controlDiv.appendChild(controlUI);
+
+  // Set CSS for the control interior
+  var controlText = document.createElement('div');
+  controlText.style.fontFamily = 'Arial,sans-serif';
+  controlText.style.fontSize = '12px';
+  controlText.style.paddingLeft = '4px';
+  controlText.style.paddingRight = '4px';
+  controlText.innerHTML = '<b>Home</b>';
+  controlUI.appendChild(controlText);
+
+  // Setup the click event listeners: simply set the map to
+  // Chicago
+  google.maps.event.addDomListener(controlUI, 'click', function() {
+    map.setCenter(new google.maps.LatLng(21.431714, -157.952848))
+  });
+
+}
+function ReloadControl(controlDiv, map) {
+
+  // Set CSS styles for the DIV containing the control
+  // Setting padding to 5 px will offset the control
+  // from the edge of the map
+  controlDiv.style.padding = '5px';
+
+  // Set CSS for the control border
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundColor = 'white';
+  controlUI.style.borderStyle = 'solid';
+  controlUI.style.borderWidth = '2px';
+  controlUI.style.cursor = 'pointer';
+  controlUI.style.textAlign = 'center';
+  controlUI.title = 'Click to reload the map';
+  controlDiv.appendChild(controlUI);
+
+  // Set CSS for the control interior
+  var controlText = document.createElement('div');
+  controlText.style.fontFamily = 'Arial,sans-serif';
+  controlText.style.fontSize = '12px';
+  controlText.style.paddingLeft = '4px';
+  controlText.style.paddingRight = '4px';
+  controlText.innerHTML = '<b>Reload</b>';
+  controlUI.appendChild(controlText);
+
+  // Setup the click event listeners: simply set the map to
+  // Chicago
+  google.maps.event.addDomListener(controlUI, 'click', function() {
+    loadScript();
+  });
+
+}
+
+window.onload = loadScript;	
+</script-->	
 	
   </body>
 </html>

@@ -1,0 +1,12 @@
+.drop_area {
+  height: 200px;
+}
+#drop {
+  outline: 1px solid gray;
+}
+#drop_text, #drop_binary {
+  width: 100%;
+}
+.modal-body {
+  position: relative;
+}
