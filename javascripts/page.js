@@ -227,7 +227,6 @@
       image4_url = dom.image4.attr('content');
       image5_url = dom.image5.attr('content');
       image6_url = dom.image6.attr('content');
-      alert(dom.title4e.text);
       title1 = document.getElementById("title1").value;
       title1a = document.getElementById("title1a").value;
       title1b = document.getElementById("title1b").value;
