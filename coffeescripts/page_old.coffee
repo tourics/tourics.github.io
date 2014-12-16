@@ -63,3 +63,4 @@ $ ->
   coffee -cwo javascripts/ coffeescripts/
 ###
 
+dom.loginbtn.text "logout"

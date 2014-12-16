@@ -1,8 +1,8 @@
 $ ->
   dom = {}
   ids = ['icon1','icon2','icon3','icon4','icon5','icon6','icon7','icon8','icon9','icon10','icon11','icon12','icon13','icon14','icon15','icon16','icon17','icon18','icon19','icon20',
-         'icon21','icon22','icon23','icon24','icon25','icon26','icon27','icon28','icon29','icon30','icon31','icon32',      
-        'loginbtn','loginWindow','username','password','login','sizeM','sizeL','heightL','heightM','widthM','widthL','usePicAsMarker','upload','selectedIcon', 'cancleIcon','reload','save', 'open','image1','image2','image3','image4','image5','image6', 
+        'icon21','icon22','icon23','icon24','icon25','icon26','icon27','icon28','icon29','icon30','icon31','icon32',      
+        'selectedTheme','defaultTheme','theme1','theme2','theme3','theme4','theme5','theme6','video1','video','ccvideo1','ccvideo2','saveVideo1','loadbar','logoutbtn', 'loginbtn','loginWindow','username','password','login','sizeM','sizeL','heightL','heightM','widthM','widthL','usePicAsMarker','upload','selectedIcon', 'cancleIcon','reload','save', 'open','image1','image2','image3','image4','image5','image6', 
         'image1_data','title1', 'title2','title3','title4','title5','title6','newtitle1','savetitle1', 'newtitle2','savetitle2', 'newtitle3','savetitle3', 'newtitle4','savetitle4','newtitle5' ,'savetitle5',
         'image1a_data','title1a',  'title2a','title3a','title4a','title5a','title6a','newtitle1a','savetitle1a', 'newtitle2a','savetitle2a', 'newtitle3a','savetitle3a', 'newtitle4a','savetitle4a', 'newtitle5a','savetitle5a',
         'image1b_data','title1b',  'title2b','title3b','title4b','title5b','title6b','newtitle1b','savetitle1b', 'newtitle2b','savetitle2b', 'newtitle3b','savetitle3b', 'newtitle4b','savetitle4b', 'newtitle5b','savetitle5b',
@@ -17,7 +17,7 @@ $ ->
   $(document.body).on('dragover', noDnD).on('drop', noDnD)
   dom.dropped = $ '.dropped'
   dom.dropped.hide()
-  
+  $('#logoutbtn').hide() 
 
   ###################################################### my codes
   loadContents = (Myid, Myfile) ->
@@ -428,7 +428,12 @@ $ ->
   
   loadScript = ->
     reflashAddressField()
-    initialize addresses
+    delay = 1000 #1 seconds
+    loadBar()
+    setTimeout (->
+      initialize addresses
+      return
+    ), delay     
     return
   HomeControl = (controlDiv, map) ->
     
@@ -493,7 +498,12 @@ $ ->
     # Chicago
     google.maps.event.addDomListener controlUI, "click", ->
       loadCoordinator()
-      loadScript()     
+      delay = 1000 #1 seconds
+      loadBar()
+      setTimeout (->
+        loadScript() 
+        return
+      ), delay    
       return  
     return
     
@@ -503,6 +513,8 @@ $ ->
     loadScript() 
   ChangeSelectedIconSrc = (data) ->
     dom.selectedIcon.attr {src:data}
+  ChangeSelectedThemeSrc = (data) ->
+    dom.selectedTheme.attr {src:data}
   dom.cancleIcon.on 'click', ->
     image = url:"http://maps.google.com/mapfiles/ms/icons/POI.png"
     copyImgeUrl()
@@ -678,26 +690,35 @@ $ ->
     ctx.drawImage img, 0, 0, w, h    
     # encode image to data-uri with base64 version of compressed image
     canvas.toDataURL()
-  dom.usePicAsMarker.on "click", ->
+  dom.usePicAsMarker.on "click", ->  
     temp1 =  new Image()
     temp2 =  new Image()
     temp3 =  new Image()
     temp4 =  new Image()
     temp5 =  new Image()
     temp6 =  new Image()
+    temp =  new Image()
+    temp.src = tour1.url    
     temp1.src = $("#image1").attr "content"
     temp2.src = $("#image2").attr "content"
     temp3.src = $("#image3").attr "content"
     temp4.src = $("#image4").attr "content"
     temp5.src = $("#image5").attr "content"
     temp6.src = $("#image6").attr "content"
-    tour1 = url: CovertIMGsize(temp1, 40, 40)
-    tour2 = url: CovertIMGsize(temp2, 40, 40)
-    tour3 = url: CovertIMGsize(temp3, 40, 40)
-    tour4 = url: CovertIMGsize(temp4, 40, 40)
-    tour5 = url: CovertIMGsize(temp5, 40, 40)
-    tour6 = url: CovertIMGsize(temp6, 40, 40)
-    loadScript()
+    size1= temp.width
+    size2= temp.height    
+    delay = 1000 #1 seconds
+    loadBar()
+    setTimeout (->
+      tour1 = url: CovertIMGsize(temp1, size1, size2)
+      tour2 = url: CovertIMGsize(temp2, size1, size2)
+      tour3 = url: CovertIMGsize(temp3, size1, size2)
+      tour4 = url: CovertIMGsize(temp4, size1, size2)
+      tour5 = url: CovertIMGsize(temp5, size1, size2)
+      tour6 = url: CovertIMGsize(temp6, size1, size2)
+      loadScript()
+      return
+    ), delay
   dom.widthL.on "click", ->
     temp1 =  new Image()
     temp2 =  new Image()
@@ -705,21 +726,28 @@ $ ->
     temp4 =  new Image()
     temp5 =  new Image()
     temp6 =  new Image()
-    temp1.src = tour1.url
-    temp2.src = tour2.url
-    temp3.src = tour3.url
-    temp4.src = tour4.url
-    temp5.src = tour5.url
-    temp6.src = tour6.url
-    size1= temp1.width-10
-    size2= temp2.height
-    tour1 = url: CovertIMGsize(temp1, size1, size2)
-    tour2 = url: CovertIMGsize(temp2, size1, size2)
-    tour3 = url: CovertIMGsize(temp3, size1, size2)
-    tour4 = url: CovertIMGsize(temp4, size1, size2)
-    tour5 = url: CovertIMGsize(temp5, size1, size2)
-    tour6 = url: CovertIMGsize(temp6, size1, size2)
-    loadScript()
+    temp =  new Image()
+    temp.src = tour1.url
+    temp1.src = $("#image1").attr "content"
+    temp2.src = $("#image2").attr "content"
+    temp3.src = $("#image3").attr "content"
+    temp4.src = $("#image4").attr "content"
+    temp5.src = $("#image5").attr "content"
+    temp6.src = $("#image6").attr "content"
+    size1= temp.width-10
+    size2= temp.height
+    delay = 1000 #1 seconds
+    loadBar()
+    setTimeout (->
+      tour1 = url: CovertIMGsize(temp1, size1, size2)
+      tour2 = url: CovertIMGsize(temp2, size1, size2)
+      tour3 = url: CovertIMGsize(temp3, size1, size2)
+      tour4 = url: CovertIMGsize(temp4, size1, size2)
+      tour5 = url: CovertIMGsize(temp5, size1, size2)
+      tour6 = url: CovertIMGsize(temp6, size1, size2)
+      loadScript()
+      return
+    ), delay
   dom.widthM.on "click", ->
     temp1 =  new Image()
     temp2 =  new Image()
@@ -727,21 +755,28 @@ $ ->
     temp4 =  new Image()
     temp5 =  new Image()
     temp6 =  new Image()
-    temp1.src = tour1.url
-    temp2.src = tour2.url
-    temp3.src = tour3.url
-    temp4.src = tour4.url
-    temp5.src = tour5.url
-    temp6.src = tour6.url
-    size1= temp1.width+10
-    size2= temp2.height
-    tour1 = url: CovertIMGsize(temp1, size1, size2)
-    tour2 = url: CovertIMGsize(temp2, size1, size2)
-    tour3 = url: CovertIMGsize(temp3, size1, size2)
-    tour4 = url: CovertIMGsize(temp4, size1, size2)
-    tour5 = url: CovertIMGsize(temp5, size1, size2)
-    tour6 = url: CovertIMGsize(temp6, size1, size2)
-    loadScript()
+    temp =  new Image()
+    temp.src = tour1.url
+    temp1.src = $("#image1").attr "content"
+    temp2.src = $("#image2").attr "content"
+    temp3.src = $("#image3").attr "content"
+    temp4.src = $("#image4").attr "content"
+    temp5.src = $("#image5").attr "content"
+    temp6.src = $("#image6").attr "content"
+    size1= temp.width+10
+    size2= temp.height
+    delay = 1000 #1 seconds
+    loadBar()
+    setTimeout (->
+      tour1 = url: CovertIMGsize(temp1, size1, size2)
+      tour2 = url: CovertIMGsize(temp2, size1, size2)
+      tour3 = url: CovertIMGsize(temp3, size1, size2)
+      tour4 = url: CovertIMGsize(temp4, size1, size2)
+      tour5 = url: CovertIMGsize(temp5, size1, size2)
+      tour6 = url: CovertIMGsize(temp6, size1, size2)
+      loadScript()
+      return
+    ), delay
   dom.heightL.on "click", ->
     temp1 =  new Image()
     temp2 =  new Image()
@@ -749,21 +784,28 @@ $ ->
     temp4 =  new Image()
     temp5 =  new Image()
     temp6 =  new Image()
-    temp1.src = tour1.url
-    temp2.src = tour2.url
-    temp3.src = tour3.url
-    temp4.src = tour4.url
-    temp5.src = tour5.url
-    temp6.src = tour6.url
-    size1= temp1.width
-    size2= temp1.height-10
-    tour1 = url: CovertIMGsize(temp1, size1, size2)
-    tour2 = url: CovertIMGsize(temp2, size1, size2)
-    tour3 = url: CovertIMGsize(temp3, size1, size2)
-    tour4 = url: CovertIMGsize(temp4, size1, size2)
-    tour5 = url: CovertIMGsize(temp5, size1, size2)
-    tour6 = url: CovertIMGsize(temp6, size1, size2)
-    loadScript()
+    temp =  new Image()
+    temp.src = tour1.url
+    temp1.src = $("#image1").attr "content"
+    temp2.src = $("#image2").attr "content"
+    temp3.src = $("#image3").attr "content"
+    temp4.src = $("#image4").attr "content"
+    temp5.src = $("#image5").attr "content"
+    temp6.src = $("#image6").attr "content"
+    size1= temp.width
+    size2= temp.height-10
+    delay = 1000 #1 seconds
+    loadBar()
+    setTimeout (->
+      tour1 = url: CovertIMGsize(temp1, size1, size2)
+      tour2 = url: CovertIMGsize(temp2, size1, size2)
+      tour3 = url: CovertIMGsize(temp3, size1, size2)
+      tour4 = url: CovertIMGsize(temp4, size1, size2)
+      tour5 = url: CovertIMGsize(temp5, size1, size2)
+      tour6 = url: CovertIMGsize(temp6, size1, size2)
+      loadScript()
+      return
+    ), delay
   dom.heightM.on "click", ->
     temp1 =  new Image()
     temp2 =  new Image()
@@ -771,21 +813,28 @@ $ ->
     temp4 =  new Image()
     temp5 =  new Image()
     temp6 =  new Image()
-    temp1.src = tour1.url
-    temp2.src = tour2.url
-    temp3.src = tour3.url
-    temp4.src = tour4.url
-    temp5.src = tour5.url
-    temp6.src = tour6.url
-    size1= temp1.width
-    size2= temp2.height+10
-    tour1 = url: CovertIMGsize(temp1, size1, size2)
-    tour2 = url: CovertIMGsize(temp2, size1, size2)
-    tour3 = url: CovertIMGsize(temp3, size1, size2)
-    tour4 = url: CovertIMGsize(temp4, size1, size2)
-    tour5 = url: CovertIMGsize(temp5, size1, size2)
-    tour6 = url: CovertIMGsize(temp6, size1, size2)
-    loadScript()
+    temp =  new Image()
+    temp.src = tour1.url
+    temp1.src = $("#image1").attr "content"
+    temp2.src = $("#image2").attr "content"
+    temp3.src = $("#image3").attr "content"
+    temp4.src = $("#image4").attr "content"
+    temp5.src = $("#image5").attr "content"
+    temp6.src = $("#image6").attr "content"
+    size1= temp.width
+    size2= temp.height+10
+    delay = 1000 #1 seconds
+    loadBar()
+    setTimeout (->
+      tour1 = url: CovertIMGsize(temp1, size1, size2)
+      tour2 = url: CovertIMGsize(temp2, size1, size2)
+      tour3 = url: CovertIMGsize(temp3, size1, size2)
+      tour4 = url: CovertIMGsize(temp4, size1, size2)
+      tour5 = url: CovertIMGsize(temp5, size1, size2)
+      tour6 = url: CovertIMGsize(temp6, size1, size2)
+      loadScript()
+      return
+    ), delay
    dom.sizeL.on "click", ->
     temp1 =  new Image()
     temp2 =  new Image()
@@ -793,21 +842,27 @@ $ ->
     temp4 =  new Image()
     temp5 =  new Image()
     temp6 =  new Image()
-    temp1.src = tour1.url
-    temp2.src = tour2.url
-    temp3.src = tour3.url
-    temp4.src = tour4.url
-    temp5.src = tour5.url
-    temp6.src = tour6.url
-    size1= temp1.width-10
-    size2= temp1.height-10
-    tour1 = url: CovertIMGsize(temp1, size1, size2)
-    tour2 = url: CovertIMGsize(temp2, size1, size2)
-    tour3 = url: CovertIMGsize(temp3, size1, size2)
-    tour4 = url: CovertIMGsize(temp4, size1, size2)
-    tour5 = url: CovertIMGsize(temp5, size1, size2)
-    tour6 = url: CovertIMGsize(temp6, size1, size2)
-    loadScript()
+    temp =  new Image()
+    temp.src = tour1.url
+    temp1.src = $("#image1").attr "content"
+    temp2.src = $("#image2").attr "content"
+    temp3.src = $("#image3").attr "content"
+    temp4.src = $("#image4").attr "content"
+    temp5.src = $("#image5").attr "content"
+    temp6.src = $("#image6").attr "content"
+    size1= temp.width-10
+    size2= temp.height-10
+    delay = 1000 #1 seconds
+    setTimeout (->
+      tour1 = url: CovertIMGsize(temp1, size1, size2)
+      tour2 = url: CovertIMGsize(temp2, size1, size2)
+      tour3 = url: CovertIMGsize(temp3, size1, size2)
+      tour4 = url: CovertIMGsize(temp4, size1, size2)
+      tour5 = url: CovertIMGsize(temp5, size1, size2)
+      tour6 = url: CovertIMGsize(temp6, size1, size2)
+      loadScript()
+      return
+    ), delay
   dom.sizeM.on "click", ->
     temp1 =  new Image()
     temp2 =  new Image()
@@ -815,43 +870,482 @@ $ ->
     temp4 =  new Image()
     temp5 =  new Image()
     temp6 =  new Image()
-    temp1.src = tour1.url
-    temp2.src = tour2.url
-    temp3.src = tour3.url
-    temp4.src = tour4.url
-    temp5.src = tour5.url
-    temp6.src = tour6.url
-    size1= temp1.width+10
-    size2= temp2.height+10
-    tour1 = url: CovertIMGsize(temp1, size1, size2)
-    tour2 = url: CovertIMGsize(temp2, size1, size2)
-    tour3 = url: CovertIMGsize(temp3, size1, size2)
-    tour4 = url: CovertIMGsize(temp4, size1, size2)
-    tour5 = url: CovertIMGsize(temp5, size1, size2)
-    tour6 = url: CovertIMGsize(temp6, size1, size2)
-    loadScript()
-  $('.user_edit_enable').hide()
-  dom.login.on "click", -> #function to check userid & password  
-    #the following code checkes whether the entered userid and password are matching
-    if document.getElementById("username").value is "user" and document.getElementById("password").value is "123"
-      $('.user_edit_enable').show()
-      dom.loginbtn.text "logout"
-      alert("Successfully logged in");
-      
-    else
-      alert "Error Password or Username" #displays error message
-    return
-  
+    temp =  new Image()
+    temp.src = tour1.url
+    temp1.src = $("#image1").attr "content"
+    temp2.src = $("#image2").attr "content"
+    temp3.src = $("#image3").attr "content"
+    temp4.src = $("#image4").attr "content"
+    temp5.src = $("#image5").attr "content"
+    temp6.src = $("#image6").attr "content"
+    size1= temp.width+10
+    size2= temp.height+10
+    delay = 1000 #1 seconds
+    loadBar()
+    setTimeout (->
+      tour1 = url: CovertIMGsize(temp1, size1, size2)
+      tour2 = url: CovertIMGsize(temp2, size1, size2)
+      tour3 = url: CovertIMGsize(temp3, size1, size2)
+      tour4 = url: CovertIMGsize(temp4, size1, size2)
+      tour5 = url: CovertIMGsize(temp5, size1, size2)
+      tour6 = url: CovertIMGsize(temp6, size1, size2)
+      loadScript()
+      return
+    ), delay
+    
   dom.upload.on "click", ->
     img = new Image() 
     onRead = (file, content) ->
       img.src = content 
       if js.File.isWebImageType file.type
-        image = url: CovertIMGsize(img, 32, 32)
-        ChangeSelectedIconSrc CovertIMGsize(img, 32, 32)
-        copyImgeUrl()
-        loadScript() 
+        delay = 1000 #1 seconds
+        loadBar()
+        setTimeout (->
+          temp =  new Image()
+          temp.src = tour1.url
+          size1= temp.width
+          size2= temp.height
+          image = url: CovertIMGsize(img, size1, size2)
+          ChangeSelectedIconSrc CovertIMGsize(img, 32, 32)
+          copyImgeUrl()
+          loadScript()
+          return
+        ), delay 
     js.File.read onRead
+  setCookie = (cname, cvalue, exdays) ->
+    d = new Date()
+    d.setTime d.getTime() + (exdays * 24 * 60 * 60 * 1000)
+    expires = "expires=" + d.toUTCString()
+    document.cookie = cname + "=" + cvalue + "; " + expires
+    return
+  getCookie = (cname) ->
+    name = cname + "="
+    ca = document.cookie.split(";")
+    i = 0
+  
+    while i < ca.length
+      c = ca[i]
+      c = c.substring(1)  while c.charAt(0) is " "
+      return c.substring(name.length, c.length)  unless c.indexOf(name) is -1
+      i++
+    ""
+  checkCookie = ->    
+    user = getCookie("username")
+    if user is "user"
+      $('.user_edit_enable').show()
+      $('#logoutbtn').show()
+      $('#loginbtn').hide()
+    else
+      $('.user_edit_enable').hide()
+      $('#logoutbtn').hide()     
+    return   
+  checkCookie()
+  dom.logoutbtn.on "click", ->
+    setCookie "username", "", 365
+    $('#logoutbtn').hide()
+    $('#loginbtn').show()
+    $('.user_edit_enable').hide()
+  $('#loadbarInner').css "opacity", 1 
+  loadBar = ->
+    document.getElementById("usePicAsMarker").disabled = true;
+    document.getElementById("widthL").disabled = true;
+    document.getElementById("widthM").disabled = true;
+    document.getElementById("heightL").disabled = true;
+    document.getElementById("heightM").disabled = true;
+    document.getElementById("sizeL").disabled = true;
+    document.getElementById("sizeM").disabled = true;
+    $('#loadbarInner').css "opacity", 1
+    $(window).ready (e) ->
+      $.each $("div.progress-bar"), ->
+        $(this).css "width", $(this).attr("aria-valuetransitiongoal") + "%"
+        return    
+      return
+    delay = 2000 #1 seconds
+    setTimeout (->
+      $('#loadbarInner').css "opacity", 0 
+      $("div.progress-bar").css "width", "0%" 
+      document.getElementById("usePicAsMarker").disabled = false;
+      document.getElementById("widthL").disabled = false;
+      document.getElementById("widthM").disabled = false;
+      document.getElementById("heightL").disabled = false;
+      document.getElementById("heightM").disabled = false;
+      document.getElementById("sizeL").disabled = false;
+      document.getElementById("sizeM").disabled = false;
+      return
+    ), delay 
+    return 
+  autoPlayYouTubeModal1 = ->
+    trigger = $("body").find("[data-toggle=\"modal\"]")
+    trigger.click ->
+      theModal = $(this).data("target")
+      videoSRC = $(this).attr("data-theVideo")
+      videoSRCauto = videoSRC + "?autoplay=1"
+      $(theModal + " iframe").attr "src", videoSRCauto
+      $(theModal + " button.close").click ->
+        $(theModal + " iframe").attr "src", videoSRC
+        return
+  
+      return
+  
+    return
+  changeVideoLink = ->
+    trigger = $("body").find("[data-toggle=\"modal\"]")
+    trigger.click ->
+      theModal = $(this).data("target")
+      videoSRC = $(this).attr("data-theVideo")
+      videoSRCauto = videoSRC + "?autoplay=1"
+      $(theModal + " iframe").attr "src", videoSRCauto
+      $(theModal + " #saveVideo1").attr "content", $(this).attr("id")
+      $(theModal + " button.close").click ->
+        $(theModal + " iframe").attr "src", videoSRC
+        return
+  
+      return
+  
+    return
+  $(document).ready ->
+    autoPlayYouTubeModal1()
+    changeVideoLink()
+    return
+  dom.saveVideo1.on "click", ->
+    id = $("#saveVideo1").attr "content";
+    value = $("#newVideoLink1").attr "value";
+    if id is "ccvideo1"
+      $("#video1").attr "data-theVideo", value
+      $("#ccvideo1").attr "data-theVideo", value 
+    else if id is "ccvideo2"
+      $("#video2").attr "data-theVideo", value
+      $("#ccvideo2").attr "data-theVideo", value
+    else if id is "ccvideo3"
+      $("#video3").attr "data-theVideo", value
+      $("#ccvideo3").attr "data-theVideo", value
+    else if id is "ccvideo4"
+      $("#video4").attr "data-theVideo", value
+      $("#ccvideo4").attr "data-theVideo", value
+    else if id is "ccvideo5"
+      $("#video5").attr "data-theVideo", value
+      $("#ccvideo5").attr "data-theVideo", value
+    else if id is "ccvideo6"
+      $("#video6").attr "data-theVideo", value
+      $("#ccvideo6").attr "data-theVideo", value
+    alert "You have Successfully saved the link" 
+  dom.theme1.on "click", ->
+      ChangeSelectedThemeSrc document.getElementById("theme1").src
+
+      body             = $("body")
+      logobar          = $(".theme1-nav")
+      navbar           = $(".main-nav")      
+      jumb             = $(".jumbotron ")
+      cardBg           = $(".programs-card")
+      footer           = $("footer")
+      progress         = $(".progress")
+      
+      bigTitle         = $(".jumbotron .desktop-program-title")            
+      navText          = $(".navbar-default .navbar-nav > li > a")
+      navTextActive    = $(".navbar-default .navbar-nav > .active > a")
+      cardTitle        = $(".jumbotron .program-title")
+      cardtilte2       = $(".jumbotron .programs h5")
+      cardtilte3       = $(".jumbotron .from")
+      cardtilte4       = $(".jumbotron .price")
+      cardtilte5       = $(".powerby")
+      cardtilte6       = $(".powerby a")
+      
+      color1 = "#FFCC33"
+      color2 = "white"
+      color3 = "#A45209"
+      color4 = "#533419"
+      color5 = "#EEA236"
+      
+      body.css "background-color", color2
+      logobar.css "background-color", color1
+      navbar.css "background-color", color5
+      jumb.css "background-color", color1
+      cardBg.css "background-color", color2
+      footer.css "background-color", color1
+      progress.css "background-color", color1
+      
+      bigTitle.css "color", color3          
+      navText.css "color", color4  
+      navTextActive.css "color", color3   
+      cardTitle.css "color", color4  
+      cardtilte2.css "color", color4   
+      cardtilte3.css "color", color4   
+      cardtilte4.css "color", color4  
+      cardtilte5.css "color", color4   
+      cardtilte6.css "color", color4   
+ 
+  dom.theme2.on "click", ->
+      ChangeSelectedThemeSrc document.getElementById("theme2").src
+      body             = $("body")
+      logobar          = $(".theme1-nav")
+      navbar           = $(".main-nav")      
+      jumb             = $(".jumbotron ")
+      cardBg           = $(".programs-card")
+      footer           = $("footer")
+      progress         = $(".progress")
+      
+      bigTitle         = $(".jumbotron .desktop-program-title")            
+      navText          = $(".navbar-default .navbar-nav > li > a")
+      navTextActive    = $(".navbar-default .navbar-nav > .active > a")
+      cardTitle        = $(".jumbotron .program-title")
+      cardtilte2       = $(".jumbotron .programs h5")
+      cardtilte3       = $(".jumbotron .from")
+      cardtilte4       = $(".jumbotron .price")
+      cardtilte5       = $(".powerby")
+      cardtilte6       = $(".powerby a")
+      
+      color1 = "#000000"
+      color2 = "#FFFFFF"
+      color3 = "#A88037"
+      color4 = "#FF5732"
+      color5 = "#000000"
+      
+      body.css "background-color", color2
+      logobar.css "background-color", color1
+      navbar.css "background-color", color5
+      jumb.css "background-color", color1
+      cardBg.css "background-color", color2
+      footer.css "background-color", color1
+      progress.css "background-color", color1
+      
+      bigTitle.css "color", color3          
+      navText.css "color", color4  
+      navTextActive.css "color", color3   
+      cardTitle.css "color", color4  
+      cardtilte2.css "color", color4   
+      cardtilte3.css "color", color4   
+      cardtilte4.css "color", color4  
+      cardtilte5.css "color", color4   
+      cardtilte6.css "color", color4
+      
+  dom.theme3.on "click", ->
+      ChangeSelectedThemeSrc document.getElementById("theme3").src
+      body             = $("body")
+      logobar          = $(".theme1-nav")
+      navbar           = $(".main-nav")      
+      jumb             = $(".jumbotron ")
+      cardBg           = $(".programs-card")
+      footer           = $("footer")
+      progress         = $(".progress")
+      
+      bigTitle         = $(".jumbotron .desktop-program-title")            
+      navText          = $(".navbar-default .navbar-nav > li > a")
+      navTextActive    = $(".navbar-default .navbar-nav > .active > a")
+      cardTitle        = $(".jumbotron .program-title")
+      cardtilte2       = $(".jumbotron .programs h5")
+      cardtilte3       = $(".jumbotron .from")
+      cardtilte4       = $(".jumbotron .price")
+      cardtilte5       = $(".powerby")
+      cardtilte6       = $(".powerby a")
+      
+      color1 = "#82AFF9"
+      color2 = "#29264E"
+      color3 = "#F9D08B"
+      color4 = "#F97D81"
+      color5 = "#9881F5"
+      
+      body.css "background-color", color2
+      logobar.css "background-color", color1
+      navbar.css "background-color", color5
+      jumb.css "background-color", color1
+      cardBg.css "background-color", color2
+      footer.css "background-color", color1
+      progress.css "background-color", color1
+      
+      bigTitle.css "color", color3          
+      navText.css "color", color2  
+      navTextActive.css "color", color3   
+      cardTitle.css "color", color4  
+      cardtilte2.css "color", color4   
+      cardtilte3.css "color", color4   
+      cardtilte4.css "color", color4  
+      cardtilte5.css "color", color4   
+      cardtilte6.css "color", color4 
+  dom.theme4.on "click", ->
+      ChangeSelectedThemeSrc document.getElementById("theme4").src
+      body             = $("body")
+      logobar          = $(".theme1-nav")
+      navbar           = $(".main-nav")      
+      jumb             = $(".jumbotron ")
+      cardBg           = $(".programs-card")
+      footer           = $("footer")
+      progress         = $(".progress")
+      
+      bigTitle         = $(".jumbotron .desktop-program-title")            
+      navText          = $(".navbar-default .navbar-nav > li > a")
+      navTextActive    = $(".navbar-default .navbar-nav > .active > a")
+      cardTitle        = $(".jumbotron .program-title")
+      cardtilte2       = $(".jumbotron .programs h5")
+      cardtilte3       = $(".jumbotron .from")
+      cardtilte4       = $(".jumbotron .price")
+      cardtilte5       = $(".powerby")
+      cardtilte6       = $(".powerby a")
+      
+      color1 = "#D77A44"
+      color2 = "#FEFEFE"
+      color3 = "#B1C392"
+      color4 = "#DFD6AE"
+      color5 = "#274245"
+      
+      body.css "background-color", color2
+      logobar.css "background-color", color1
+      navbar.css "background-color", color5
+      jumb.css "background-color", color1
+      cardBg.css "background-color", color2
+      footer.css "background-color", color1
+      progress.css "background-color", color1
+      
+      bigTitle.css "color", color3          
+      navText.css "color", color2  
+      navTextActive.css "color", color3   
+      cardTitle.css "color", color4  
+      cardtilte2.css "color", color4   
+      cardtilte3.css "color", color4   
+      cardtilte4.css "color", color4  
+      cardtilte5.css "color", color4   
+      cardtilte6.css "color", color4  
+  dom.theme5.on "click", ->
+      ChangeSelectedThemeSrc document.getElementById("theme5").src
+      body             = $("body")
+      logobar          = $(".theme1-nav")
+      navbar           = $(".main-nav")      
+      jumb             = $(".jumbotron ")
+      cardBg           = $(".programs-card")
+      footer           = $("footer")
+      progress         = $(".progress")
+      
+      bigTitle         = $(".jumbotron .desktop-program-title")            
+      navText          = $(".navbar-default .navbar-nav > li > a")
+      navTextActive    = $(".navbar-default .navbar-nav > .active > a")
+      cardTitle        = $(".jumbotron .program-title")
+      cardtilte2       = $(".jumbotron .programs h5")
+      cardtilte3       = $(".jumbotron .from")
+      cardtilte4       = $(".jumbotron .price")
+      cardtilte5       = $(".powerby")
+      cardtilte6       = $(".powerby a")
+      
+      color1 = "#835322"
+      color2 = "#FEEA65"
+      color3 = "#F191BA"
+      color4 = "#E13987"
+      color5 = "#64BD4F"
+      
+      body.css "background-color", color2
+      logobar.css "background-color", color1
+      navbar.css "background-color", color5
+      jumb.css "background-color", color1
+      cardBg.css "background-color", color2
+      footer.css "background-color", color1
+      progress.css "background-color", color1
+      
+      bigTitle.css "color", color3          
+      navText.css "color", color2  
+      navTextActive.css "color", color3   
+      cardTitle.css "color", color4  
+      cardtilte2.css "color", color4   
+      cardtilte3.css "color", color4   
+      cardtilte4.css "color", color4  
+      cardtilte5.css "color", color4   
+      cardtilte6.css "color", color4 
+  dom.theme6.on "click", ->
+      ChangeSelectedThemeSrc document.getElementById("theme6").src
+      body             = $("body")
+      logobar          = $(".theme1-nav")
+      navbar           = $(".main-nav")      
+      jumb             = $(".jumbotron ")
+      cardBg           = $(".programs-card")
+      footer           = $("footer")
+      progress         = $(".progress")
+      
+      bigTitle         = $(".jumbotron .desktop-program-title")            
+      navText          = $(".navbar-default .navbar-nav > li > a")
+      navTextActive    = $(".navbar-default .navbar-nav > .active > a")
+      cardTitle        = $(".jumbotron .program-title")
+      cardtilte2       = $(".jumbotron .programs h5")
+      cardtilte3       = $(".jumbotron .from")
+      cardtilte4       = $(".jumbotron .price")
+      cardtilte5       = $(".powerby")
+      cardtilte6       = $(".powerby a")
+      
+      color1 = "#000000"
+      color2 = "#FFFFFF"
+      color3 = "#999"
+      color4 = "#40B8AF"
+      color5 = "#F6B17F"
+      
+      body.css "background-color", color4
+      logobar.css "background-color", color3
+      navbar.css "background-color", color4
+      jumb.css "background-color", color5
+      cardBg.css "background-color", color3
+      footer.css "background-color", color4
+      progress.css "background-color", color5
+      
+      bigTitle.css "color", color1          
+      navText.css "color", color1  
+      navTextActive.css "color", color2   
+      cardTitle.css "color", color1  
+      cardtilte2.css "color", color1   
+      cardtilte3.css "color", color1   
+      cardtilte4.css "color", color1  
+      cardtilte5.css "color", color1   
+      cardtilte6.css "color", color1      
+  dom.defaultTheme.on "click", ->
+      ChangeSelectedThemeSrc "assets/t6.jpg"
+      body             = $("body")
+      logobar          = $(".theme1-nav")
+      navbar           = $(".main-nav")      
+      jumb             = $(".jumbotron ")
+      cardBg           = $(".programs-card")
+      footer           = $("footer")
+      progress         = $(".progress")
+      
+      bigTitle         = $(".jumbotron .desktop-program-title")            
+      navText          = $(".navbar-default .navbar-nav > li > a")
+      navTextActive    = $(".navbar-default .navbar-nav > .active > a")
+      cardTitle        = $(".jumbotron .program-title")
+      cardtilte2       = $(".jumbotron .programs h5")
+      cardtilte3       = $(".jumbotron .from")
+      cardtilte4       = $(".jumbotron .price")
+      cardtilte5       = $(".powerby")
+      cardtilte6       = $(".powerby a")
+      
+      color1 = "#000000"
+      color2 = "#FFFFFF"
+      color3 = "#999"
+      color4 = "#DDD"
+      color5 = "#333"
+
+      
+      body.css "background-color", color1
+      logobar.css "background-color", color2
+      navbar.css "background-color", color5
+      jumb.css "background-color", color4
+      cardBg.css "background-color", color2
+      footer.css "background-color", color5
+      progress.css "background-color", color4
+      
+      bigTitle.css "color", color3          
+      navText.css "color", color3  
+      navTextActive.css "color", color2   
+      cardTitle.css "color", color3  
+      cardtilte2.css "color", color3   
+      cardtilte3.css "color", color3   
+      cardtilte4.css "color", color3  
+      cardtilte5.css "color", color3   
+      cardtilte6.css "color", color3          
+  dom.login.on "click", -> #function to check userid & password  
+    #the following code checkes whether the entered userid and password are matching
+    if document.getElementById("username").value is "user" and document.getElementById("password").value is "123"
+      $('.user_edit_enable').show()
+      $('#loginbtn').hide()
+      setCookie "username", document.getElementById("username").value, 365    
+      $('#logoutbtn').show()
+      alert("Successfully logged in") 
+    else
+      alert "Error Password or Username" #displays error message  
+  null
+  
   
 ###
   cd "Users/vin/Desktop/course_page/"

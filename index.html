@@ -22,6 +22,7 @@
 	<link href="asset/css/theme1.css" rel="stylesheet">
     <link href="asset/css/bootstrap_helper.css" rel="stylesheet"> <!--test test test , this can be deleted anytime-->
     <link href="asset/css/more-programs.css" rel="stylesheet"> 
+
     <!-- Custom 1 styles for this template -->
    
 
@@ -142,25 +143,29 @@
         <div class="row"> 
             <div class="navbar-collapse collapse main-nav">
               <ul class="animated fadeInRight nav navbar-nav">
-                <li class="active"><a href="index.html">One day tour</a></li>
+                <!--li class="active"><a href="index.html">One day tour</a></li-->
                
                
                 
               </ul>
               <ul class="nav navbar-nav navbar-right nav-pills" style="padding-right:40px;">
                	<li>
-                <a id ="open" class="user_edit_enable btn" > Open</a>
+                <!--a id ="open" class="user_edit_enable btn" > Open</a-->
                 
                 </li>
                
                 <li>
-                <a  type="button" class="user_edit_enable btn" data-toggle="modal" data-target="#myModal"> Save</a>
+                <!--a  type="button" class="user_edit_enable btn" data-toggle="modal" data-target="#myModal"> Save</a-->
                 
                 </li>
-                
-                <li>
-                <a id="loginbtn" type="button" class="btn" data-toggle="modal" data-target="#loginWindow"> login</a>
-                </li>
+                <li class="dropdown">
+	              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
+	              <ul class="dropdown-menu" role="menu">
+	                <a id="loginbtn" type="button" class="btn" data-toggle="modal" data-target="#loginWindow"> login</a>
+	                <a id="logoutbtn" type="button" class="btn"> logout</a>
+	              </ul>
+	            </li>
+               
               
               </ul>
               
@@ -170,6 +175,19 @@
          
       </div>
     </div> 
+<!--youtube modal-->
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModal" aria-hidden="true">
+  <div style="background-color:black;"  class="modal-dialog">
+    <div style="background-color:black!important;"  class="modal-content">
+      <div style="background-color:black!important;"  class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div>
+          <iframe width="100%" height="350" src=""></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>   
 <!--login Modal-->   
 
  		<div id="loginWindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="loginbox" style="margin-top:50px; margin-bottom:100px;" class="modal fade mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"> 
@@ -226,6 +244,32 @@
                             </div>                     
                         </div>  
             </div> 
+<!-- Modal Theme -->
+<div class="modal fade" id="themePicker" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Change Theme Color</h4>
+      </div>
+      <div class="modal-body">
+         <div class="text-center" style="padding:20px;">Current Selected Theme: <img id="selectedTheme" src="assets/t0.jpg" width="16%"></img>
+         </div>
+         <img id="theme1" src="assets/t1.jpg" width="16%"></img>
+         <img id="theme2" src="assets/t2.jpg" width="16%"></img>
+         <img id="theme3" src="assets/t3.jpg" width="16%"></img>
+         <img id="theme4" src="assets/t4.jpg" width="16%"></img>
+         <img id="theme5" src="assets/t5.jpg" width="16%"></img>
+         <img id="theme6" src="assets/t6.jpg" width="16%"></img>
+        
+      </div>
+      <div class="modal-footer">
+        <button id="defaultTheme" type="button" class="btn btn-default" data-dismiss="modal">default</button>
+        <a id="upload_data" data-dismiss="modal" type="button" class="btn btn-primary">Save</a>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Modal Icon -->
 <div class="modal fade" id="mapMarkerWindow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -274,7 +318,7 @@
       </div>
       <div class="modal-footer">
 		 <div><a class="pull-left btn btn-warning" id="upload" href="#">Upload a image</a></div> 
-        <button id="cancleIcon" type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
+        <button id="cancleIcon" type="button" class="btn btn-default" data-dismiss="modal">default</button>
         <a id="upload_data" data-dismiss="modal" type="button" class="btn btn-primary">Save</a>
       </div>
     </div>
@@ -952,8 +996,29 @@
   </div>
 </div>
 
-
-
+<!--video modal 1-->
+<div class="modal fade" id="videoLinkModal" tabindex="-1" role="dialog" aria-labelledby="videoLinkModal" aria-hidden="true">
+  <div style="background-color:black;"  class="modal-dialog">
+    <div style="background-color:black!important;"  class="modal-content">
+      <div style="background-color:black!important;"  class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <div>
+        	<form class="form-horizontal" role="form">
+		        <div class="form-group">
+		          <label class="control-label col-sm-3" for="email">New video link:</label>
+		          <div class="col-sm-7">
+		            <input type="email" class="form-control" id="newVideoLink1" placeholder="http://www.youtube.com/embed/xxxxxxxxx">
+		          </div>
+		          <button id="saveVideo1" type="button" class="btn btn-warning">Save</button>
+		        </div>
+		    </form>
+          
+          <iframe width="100%" height="350" src=""></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
  
 <!--space down from the menu bar and logo section--->
@@ -1033,17 +1098,16 @@
    
   </div> -->
     <!-- /.carousel -->
+
 <div id="googleMap" style="z-index:1; width:100%;height:380px;"></div>
+<div id="loadbar" class="progress" style="background-color:#ddd;margin:0;">
+        <div id="loadbarInner" class="progress-bar progress-bar-primary six-sec-ease-in-out" aria-valuetransitiongoal="100"></div>
+</div>
 <button id="reload" style="margin:5px;" onclick="loadScript" class="user_edit_enable pull-right btn btn-warning">Reload</button>
 <button style="margin:5px;" type="button" data-toggle="modal" data-target="#mapMarkerWindow" class="user_edit_enable user_edit_enable pull-right btn btn-warning">Change Maker</button>
-<button id="usePicAsMarker" style="margin:5px;" class="user_edit_enable pull-right btn btn-warning">Use Tour Pic as Marker</button>
-<div style="margin:5px;"  class="user_edit_enable pull-right btn btn-warning btn-group">
-        <button type="button" class="user_edit_enable btn btn-default btn-xs">SIZE</button>
-        <button id="sizeL" type="button" class="user_edit_enable btn btn-default btn-xs">-</button>
-        <button id="sizeM" type="button" class="user_edit_enable btn btn-default btn-xs">+</button>
-</div>
 
 <div style="margin:5px;" class="user_edit_enable pull-right btn btn-warning" role="toolbar" style="margin: 0;">
+	  <button id="usePicAsMarker" class="user_edit_enable btn btn-default  btn-xs">Use Tour Pic as Marker</button>
       <div class="btn-group">
         <button type="button" class="user_edit_enable btn btn-default btn-xs">Width</button>
         <button id="widthL" type="button" class="user_edit_enable btn btn-default btn-xs">-</button>
@@ -1054,9 +1118,13 @@
         <button id="heightL" type="button" class="user_edit_enable btn btn-default btn-xs">-</button>
         <button id="heightM" type="button" class="user_edit_enable btn btn-default btn-xs">+</button>
       </div>
-      
-     
-  </div>
+      <div class="btn-group">
+        <button type="button" class="user_edit_enable btn btn-default btn-xs">SIZE</button>
+        <button id="sizeL" type="button" class="user_edit_enable btn btn-default btn-xs">-</button>
+        <button id="sizeM" type="button" class="user_edit_enable btn btn-default btn-xs">+</button>    
+	  </div>
+</div>
+<button type="button" style="margin:5px;" data-toggle="modal" data-target="#themePicker" class="user_edit_enable btn btn-warning outline pull-left"><span class="glyphicon glyphicon-tint"></span>  Color Theme</button>
      <!--    activities
   ================================================== ---->
 
@@ -1073,8 +1141,15 @@
                                                      <div class=" container programs-card"> 
                                                             <div class="col-sm-4 col-xs-12" id="no-left-padding">
                                                                        
-                                                                        <div id="image1" content="assets/1.jpg" class="item tour1"><button id="image1_data" type="button" class="user_edit_enable btn btn-warning" data-dismiss="modal"><i class="glyphicon glyphicon-pencil"></i></button>  </div>
-                                                                               
+                                                                        <div id="image1" content="assets/1.jpg" class="item tour1"><button id="image1_data" type="button" class="user_edit_enable btn btn-warning" data-dismiss="modal"><i class="glyphicon glyphicon-pencil"></i></button> 
+                                                                        	
+                                                                        </div>
+                                                                        <a id="video1" style="opacity:0.9;background-color:red; color:white; margin-top:-280px; margin-left:45%;" href="#" class="btn btn-default" data-toggle="modal" data-target="#videoModal" data-theVideo="https://www.youtube.com/embed/ecwjic3dfgU" >
+                                                                        		<span class="glyphicon glyphicon-play"></span>
+                                                                        </a>
+                                                                        <button style="opacity:0.9;background-color:red; color:white;  margin-top:-250px; margin-left:45%;" id="ccvideo1" type="button" class="user_edit_enable btn btn-warning" data-toggle="modal" data-theVideo="https://www.youtube.com/embed/ecwjic3dfgU" data-target="#videoLinkModal">
+                                                                        			<i class="glyphicon glyphicon-pencil"></i>
+                                                                        </button>      
                                                             </div>	
                                     
                                                             
@@ -1139,7 +1214,13 @@
                                                             <div class="col-sm-4 col-xs-12" id="no-left-padding">
                                                                        
                                                                         <div id="image2" content="assets/2.jpg" class="item tour2"><button id="image1a_data" type="button" class="user_edit_enable btn btn-warning" data-dismiss="modal"><i class="glyphicon glyphicon-pencil"></i></button>  </div>
-                                                                               
+                                                                         <a id="video2" style="opacity:0.9;background-color:red; color:white; margin-top:-280px; margin-left:45%;" href="#" class="btn btn-default" data-toggle="modal" data-target="#videoModal" data-theVideo="http://www.youtube.com/embed/6aLPpRXKyN4" >
+                                                                        		<span class="glyphicon glyphicon-play"></span>
+                                                                        		 
+                                                                        </a>
+                                                                        <button style="opacity:0.9;background-color:red; color:white;  margin-top:-250px; margin-left:45%;" id="ccvideo2" type="button" class="user_edit_enable btn btn-warning" data-toggle="modal" data-theVideo="http://www.youtube.com/embed/6aLPpRXKyN4" data-target="#videoLinkModal">
+                                                                        			<i class="glyphicon glyphicon-pencil"></i>
+                                                                        </button>         
                                                             </div>	
                                     
                                                             
@@ -1204,7 +1285,13 @@
                                                             <div class="col-sm-4 col-xs-12" id="no-left-padding">
                                                                        
                                                                         <div id="image3" content="assets/3.jpg" class="item tour3"><button id="image1b_data" type="button" class="user_edit_enable btn btn-warning" data-dismiss="modal"><i class="glyphicon glyphicon-pencil"></i></button>  </div>
-                                                                               
+                                                                        <a id="video3" style="opacity:0.9;background-color:red; color:white; margin-top:-280px; margin-left:45%;" href="#" class="btn btn-default" data-toggle="modal" data-target="#videoModal" data-theVideo="http://www.youtube.com/embed/PO5akSeCQ_E" >
+                                                                        		<span class="glyphicon glyphicon-play"></span>
+                                                                        		 
+                                                                        </a>
+                                                                        <button style="opacity:0.9;background-color:red; color:white;  margin-top:-250px; margin-left:45%;" id="ccvideo3" type="button" class="user_edit_enable btn btn-warning" data-toggle="modal" data-theVideo="http://www.youtube.com/embed/PO5akSeCQ_E" data-target="#videoLinkModal">
+                                                                        			<i class="glyphicon glyphicon-pencil"></i>
+                                                                        </button>       
                                                             </div>	
                                     
                                                             
@@ -1268,7 +1355,13 @@
                                                             <div class="col-sm-4 col-xs-12" id="no-left-padding">
                                                                        
                                                                         <div id="image4" content="assets/4.jpg" class="item tour4"><button id="image1c_data" type="button" class="user_edit_enable btn btn-warning" data-dismiss="modal"><i class="glyphicon glyphicon-pencil"></i></button>  </div>
-                                                                               
+                                                                        <a id="video4" style="opacity:0.9;background-color:red; color:white; margin-top:-280px; margin-left:45%;" href="#" class="btn btn-default" data-toggle="modal" data-target="#videoModal" data-theVideo="http://www.youtube.com/embed/61nqwFxaiZ0" >
+                                                                        		<span class="glyphicon glyphicon-play"></span>
+                                                                        		 
+                                                                        </a>
+                                                                        <button style="opacity:0.9;background-color:red; color:white;  margin-top:-250px; margin-left:45%;" id="ccvideo4" type="button" class="user_edit_enable btn btn-warning" data-toggle="modal" data-theVideo="http://www.youtube.com/embed/61nqwFxaiZ0" data-target="#videoLinkModal">
+                                                                        			<i class="glyphicon glyphicon-pencil"></i>
+                                                                        </button>        
                                                             </div>	
                                     
                                                             
@@ -1330,7 +1423,13 @@
                                                             <div class="col-sm-4 col-xs-12" id="no-left-padding">
                                                                        
                                                                         <div id="image5" content="assets/5.jpg" class="item tour5"><button id="image1d_data" type="button" class="user_edit_enable btn btn-warning" data-dismiss="modal"><i class="glyphicon glyphicon-pencil"></i></button>  </div>
-                                                                               
+                                                                         <a id="video5" style="opacity:0.9;background-color:red; color:white; margin-top:-280px; margin-left:45%;" href="#" class="btn btn-default" data-toggle="modal" data-target="#videoModal" data-theVideo="http://www.youtube.com/embed/fJ4WsRolZ4E" >
+                                                                        		<span class="glyphicon glyphicon-play"></span>
+                                                                        		 
+                                                                        </a>
+                                                                        <button style="opacity:0.9;background-color:red; color:white;  margin-top:-250px; margin-left:45%;" id="ccvideo5" type="button" class="user_edit_enable btn btn-warning" data-toggle="modal" data-theVideo="http://www.youtube.com/embed/fJ4WsRolZ4E" data-target="#videoLinkModal">
+                                                                        			<i class="glyphicon glyphicon-pencil"></i>
+                                                                        </button>         
                                                             </div>	
                                     
                                                             
@@ -1395,7 +1494,13 @@
                                                             <div class="col-sm-4 col-xs-12" id="no-left-padding">
                                                                        
                                                                         <div id="image6" content="assets/6.jpg" class="item tour6"><button id="image1e_data" type="button" class="user_edit_enable btn btn-warning" data-dismiss="modal"><i class="glyphicon glyphicon-pencil"></i></button>  </div>
-                                                                               
+                                                                         <a id="video6" style="opacity:0.9;background-color:red; color:white; margin-top:-280px; margin-left:45%;" href="#" class="btn btn-default" data-toggle="modal" data-target="#videoModal" data-theVideo="http://www.youtube.com/embed/KfdMyOfgtps" >
+                                                                        		<span class="glyphicon glyphicon-play"></span>
+                                                                        		 
+                                                                        </a>
+                                                                        <button style="opacity:0.9;background-color:red; color:white;  margin-top:-250px; margin-left:45%;" id="ccvideo6" type="button" class="user_edit_enable btn btn-warning" data-toggle="modal" data-theVideo="http://www.youtube.com/embed/KfdMyOfgtps" data-target="#videoLinkModal">
+                                                                        			<i class="glyphicon glyphicon-pencil"></i>
+                                                                        </button>        
                                                             </div>	
                                     
                                                             
@@ -1458,7 +1563,7 @@
     	<div class="container">
              <div class="bounce-in col-sm-12">
 
-                <p class="powerby">Powered by <a href="">Vinson Gao</a></p>
+                <p class="powerby">Powered by <a href="">Vinson (Zhihua) Gao</a></p>
                 
             </div>
 		</div>
@@ -1482,8 +1587,7 @@
   <script src="javascripts/page.js" type="text/javascript"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script> 
   <script src="http://malsup.github.com/jquery.form.js"></script>
-  <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+  
    
     
   <!-- adjust navigation bar size when scroll down-->
@@ -1707,6 +1811,9 @@ function ReloadControl(controlDiv, map) {
 
 window.onload = loadScript;	
 </script-->	
-	
+<script>
+
+</script>
+
   </body>
 </html>
