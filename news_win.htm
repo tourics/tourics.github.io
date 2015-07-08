@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<title>News</title>
+
+<base target="_blank">
+
+<style type="text/css">
+<!--
+
+body	{
+	background-color: #FFFFFF;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	}
+
+ /* FONT COLORS */
+
+<!--div		{ color: #000000; font: 18px arial, sans-serif; font-weight: normal; }-->
+
+<!--.title		{ color: #0033FF; font: 19px arial, sans-serif; font-weight: bold; }-->
+
+#NewsDiv	{ position: absolute; left: 0; top: 0; width: auto; }
+
+ /* PAGE LINK COLORS */
+
+a:link		{ color: #0033FF; text-decoration: underline; }
+
+a:visited	{ color: #6633FF; text-decoration: underline; }
+
+a:active	{ color: #0033FF; text-decoration: underline; }
+
+a:hover		{ color: #6699FF; text-decoration: none; }
+
+-->
+</style>
+
+
+<script type="text/javascript">
+<!-- HIDE CODE JAVASCRIPT NEWS SCROLLER ver 2.0 2013
+
+
+var scrollspeed = 1;		// SET SCROLLER SPEED 1 = SLOWEST
+var speedjump   = 30;		// ADJUST SCROLL JUMPING = RANGE 20 TO 40
+var startdelay  = 2; 		// START SCROLLING DELAY IN SECONDS
+var nextdelay   = 0; 		// SECOND SCROLL DELAY IN SECONDS 0 = QUICKEST
+var topspace    = 0;		// TOP SPACING FIRST TIME SCROLLING
+var frameheight = 204;		// IF YOU RESIZE THE WINDOW EDIT THIS HEIGHT TO MATCH
+
+
+current = (scrollspeed);
+
+
+function HeightData() {
+    AreaHeight = dataobj.offsetHeight;
+    if (AreaHeight === 0) {
+        setTimeout("HeightData()", (startdelay * 1000));
+    } else {
+        ScrollNewsDiv();
+    }
+}
+
+function NewsScrollStart() {
+    dataobj = document.all ? document.all.NewsDiv : document.getElementById("NewsDiv");
+    dataobj.style.top = topspace + 'px';
+    setTimeout("HeightData()", (startdelay * 1000));
+}
+
+function ScrollNewsDiv() {
+    dataobj.style.top = parseInt(dataobj.style.top) - scrollspeed + 'px';
+    if (parseInt(dataobj.style.top) < AreaHeight * (-1)) {
+        dataobj.style.top = frameheight + 'px';
+        setTimeout("ScrollNewsDiv()", (nextdelay * 1000));
+    } else {
+        setTimeout("ScrollNewsDiv()", speedjump);
+    }
+}
+
+
+
+// END HIDE CODE -->
+</script>
+
+</head>
+
+<body onMouseover="scrollspeed=0" onMouseout="scrollspeed=current" OnLoad="NewsScrollStart();">
+
+<div id="NewsDiv" style="text-align: left; padding: 5px;">
+
+
+
+
+
+
+
+<!-- SCROLLER CONTENT STARTS HERE -->
+
+<font color="#000" size="2" face="Arial, Helvetica, sans-serif">
+<span class="title"><font color="#2E85BD" size="2" face="Arial, Helvetica, sans-serif"><font color="#9B090D" size="1" face="Arial, Helvetica, sans-serif">&gt;&gt;</font>
+ 2013 December 26<br></font>
+</span>
+&nbsp;&nbsp;&nbsp;GPNE Corp. enters into license agreement with Huawei Technologies Co. Ltd.<br>&nbsp;&nbsp;&nbsp;GPNE and Huawei concluded the agreement with the aim of future IP cooperation. <br>&nbsp;&nbsp;&nbsp;The specific terms of the agreement are confidential.
+<a href="pressreleases/Huawei12-26-13.pdf" target="_top">more</a>
+<br><br><br>
+<hr width="564" size="1" noshade>
+
+
+
+<span class="title"><font color="#2E85BD" size="2" face="Arial, Helvetica, sans-serif"><font color="#9B090D" size="1" face="Arial, Helvetica, sans-serif">&gt;&gt;</font>
+2013 August 27<br></font>
+</span>
+&nbsp;&nbsp;&nbsp;GPNE Corp. resolved its patent infringement claims against Amazon.com, Inc.
+<a href="pressreleases/082713Amazon.pdf" target="_top">more</a>
+<br><br><br>
+<hr width="564" size="1" noshade>
+
+
+
+<span class="title"><font color="#2E85BD" size="2" face="Arial, Helvetica, sans-serif"><font color="#9B090D" size="1" face="Arial, Helvetica, sans-serif">&gt;&gt;</font>
+2013 January 31<br></font>
+</span>
+&nbsp;&nbsp;&nbsp;GPNE Corp. enters into license agreement with Research In Motion Ltd.
+<a href="pressreleases/013113RIM.pdf" target="_top">more</a>
+<br><br><br>
+<hr width="564" size="1" noshade>
+
+
+
+<span class="title"><font color="#2E85BD" size="2" face="Arial, Helvetica, sans-serif"><font color="#9B090D" size="1" face="Arial, Helvetica, sans-serif">&gt;&gt;</font>
+2012 November 7<br></font>
+</span>
+&nbsp;&nbsp;&nbsp;GPNE Corp. enters into license agreement with Barnes & Noble, Inc.
+ <a href="pressreleases/110712PRBN.pdf" target="_top">more</a>
+<br><br><br>
+<hr width="564" size="1" noshade>
+ 
+
+
+
+<span class="title"><font color="#2E85BD" size="2" face="Arial, Helvetica, sans-serif"><font color="#9B090D" size="1" face="Arial, Helvetica, sans-serif">&gt;&gt;</font>
+2012 August 15<br></font>
+</span>&nbsp;&nbsp;&nbsp;GPNE Corp. enters into license agreement with Sony Mobile Communications (USA) Inc., and<br>
+&nbsp;&nbsp;&nbsp;Sony Mobile Communications AB.
+ <a href="pressreleases/081512PRSony.pdf" target="_top">more</a>
+
+<br><br>
+
+</font>
+
+<!-- SCROLLER CONTENT ENDS HERE -->
+
+
+
+
+
+
+
+</div>
+
+</body>
+</html>
